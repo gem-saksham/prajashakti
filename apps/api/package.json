@@ -1,0 +1,24 @@
+{
+  "name": "@prajashakti/api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "dependencies": {
+    "fastify": "^5.1.0",
+    "@fastify/cors": "^10.0.0",
+    "@fastify/helmet": "^12.0.0",
+    "@fastify/rate-limit": "^10.2.0",
+    "@fastify/jwt": "^9.0.0",
+    "@fastify/multipart": "^9.0.0",
+    "dotenv": "^16.4.0",
+    "@prajashakti/shared": "*"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

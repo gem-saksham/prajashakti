@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-deep-teal: #0d4f4f;
+  --color-teal: #14897a;
+  --color-crimson: #dc143c;
+  --color-accent-orange: #e07b3a;
+  --color-bg: #f4f5f0;
+  --color-card: #ffffff;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555555;
+  --color-text-muted: #888888;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-input-bg: #f8f8f6;
+  --font-family: 'Noto Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-teal) !important;
+  box-shadow: 0 0 0 3px rgba(14, 137, 122, 0.1);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}

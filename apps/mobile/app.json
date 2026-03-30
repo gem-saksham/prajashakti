@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "प्रजाशक्ति PrajaShakti",
+    "slug": "prajashakti",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "prajashakti",
+    "splash": {
+      "backgroundColor": "#0D4F4F",
+      "resizeMode": "contain"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "in.prajashakti.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0D4F4F"
+      },
+      "package": "in.prajashakti.app",
+      "permissions": ["CAMERA", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+    },
+    "plugins": ["expo-router"]
+  }
+}
