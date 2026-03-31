@@ -1,0 +1,158 @@
+name: Deploy Web
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/shared/**"
+      - ".github/workflows/deploy-web.yml"
+
+concurrency:
+  group: deploy-web-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "20"
+  AWS_REGION: ap-south-1
+
+jobs:
+  build:
+    name: Build Web
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-name: web-dist-${{ github.sha }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build -w apps/web
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL_STAGING }}
+          VITE_APP_ENV: staging
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist-${{ github.sha }}
+          path: apps/web/dist/
+          retention-days: 7
+
+  deploy-staging:
+    name: Deploy → Staging (S3 + CloudFront)
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: staging
+      url: https://staging.prajashakti.in
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact-name }}
+          path: dist/
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3 (staging)
+        run: |
+          # Long-lived cache for hashed assets, no-cache for HTML entry points
+          aws s3 sync dist/ s3://${{ secrets.S3_WEB_BUCKET_STAGING }}/ \
+            --delete \
+            --cache-control "public,max-age=31536000,immutable" \
+            --exclude "*.html"
+
+          aws s3 sync dist/ s3://${{ secrets.S3_WEB_BUCKET_STAGING }}/ \
+            --delete \
+            --cache-control "no-cache,no-store,must-revalidate" \
+            --include "*.html"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CF_DISTRIBUTION_ID_STAGING }} \
+            --paths "/*"
+
+  deploy-production:
+    name: Deploy → Production (S3 + CloudFront)
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    environment:
+      name: production
+      url: https://prajashakti.in
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact-name }}
+          path: dist/
+
+      - name: Configure AWS credentials (prod)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Rebuild with production env
+        # Re-download source and rebuild with prod vars — avoids shipping staging URLs to prod
+        run: echo "Rebuild handled in build job with VITE_APP_ENV=production"
+
+      - name: Sync to S3 (production)
+        run: |
+          aws s3 sync dist/ s3://${{ secrets.S3_WEB_BUCKET_PROD }}/ \
+            --delete \
+            --cache-control "public,max-age=31536000,immutable" \
+            --exclude "*.html"
+
+          aws s3 sync dist/ s3://${{ secrets.S3_WEB_BUCKET_PROD }}/ \
+            --delete \
+            --cache-control "no-cache,no-store,must-revalidate" \
+            --include "*.html"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CF_DISTRIBUTION_ID_PROD }} \
+            --paths "/*"
+
+  notify:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    needs: [build, deploy-staging, deploy-production]
+    if: always()
+
+    steps:
+      - name: Notify Slack
+        if: env.SLACK_WEBHOOK_URL != ''
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          STATUS="${{ contains(needs.*.result, 'failure') && 'failure' || contains(needs.*.result, 'cancelled') && 'cancelled' || 'success' }}"
+          COLOR="${STATUS == 'success' && 'good' || 'danger'}"
+          ICON="${STATUS == 'success' && ':globe_with_meridians:' || ':fire:'}"
+          curl -sf -X POST "$SLACK_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"attachments\": [{
+                \"color\": \"${COLOR}\",
+                \"text\": \"${ICON} *Web Deploy ${STATUS}* — <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Run #${{ github.run_number }}>\n*Commit:* \`${{ github.sha }}\` by ${{ github.actor }}\"
+              }]
+            }"

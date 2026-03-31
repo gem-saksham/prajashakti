@@ -1,0 +1,36 @@
+# Copy this file to terraform.tfvars (git-ignored) and fill in real values.
+# For CI/CD, pass sensitive values via environment variables:
+#   export TF_VAR_rds_password="your-secure-password"
+
+environment  = "dev"
+aws_region   = "ap-south-1"
+project_name = "prajashakti"
+
+# VPC
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.3.0/24", "10.0.4.0/24"]
+availability_zones   = ["ap-south-1a", "ap-south-1b"]
+
+# EKS
+eks_cluster_version   = "1.29"
+eks_node_instance_type = "t3.medium"
+eks_node_min_size     = 2
+eks_node_max_size     = 5
+eks_node_desired_size = 2
+
+# RDS
+rds_instance_class        = "db.t3.micro"
+rds_multi_az              = false
+rds_db_name               = "prajashakti"
+rds_username              = "prajashakti_admin"
+rds_password              = "CHANGE_ME_use_strong_password"
+rds_backup_retention_days = 7
+rds_allocated_storage_gb  = 20
+
+# Redis
+redis_node_type     = "cache.t3.micro"
+redis_num_cache_nodes = 1
+
+# Security
+bastion_allowed_cidr = "YOUR_IP/32"

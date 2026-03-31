@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Tests & coverage
+__tests__/
+*.test.js
+*.spec.js
+coverage/
+
+# Docs
+*.md
+docs/
+
+# Dev tooling
+.eslintrc*
+.prettierrc*
+jest.config*
+nodemon*
+
+# Misc
+.DS_Store
+*.log
