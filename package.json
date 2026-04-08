@@ -20,10 +20,13 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "prepare": "husky",
-    "docker:api": "docker build -t prajashakti-api ./apps/api",
+    "docker:api": "docker build -f apps/api/Dockerfile -t prajashakti-api .",
     "docker:run": "docker run -p 3000:3000 --env-file apps/api/.env prajashakti-api"
   },
   "devDependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
     "concurrently": "^9.1.0",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
@@ -46,5 +49,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "react-native-svg": "15.12.1"
   }
 }

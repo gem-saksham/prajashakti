@@ -2,26 +2,80 @@
   "name": "@prajashakti/mobile",
   "version": "1.0.0",
   "private": true,
-  "main": "src/App.jsx",
+  "main": "index.js",
   "scripts": {
     "start": "npx expo start",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
-    "web": "npx expo start --web"
+    "web": "npx expo start --web",
+    "test": "RNTL_SKIP_DEPS_CHECK=true jest",
+    "test:watch": "RNTL_SKIP_DEPS_CHECK=true jest --watch"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "./src/tests/setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "testMatch": [
+      "**/src/tests/**/*.test.{js,jsx}"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": [
+        "babel-jest",
+        {
+          "configFile": "./babel.config.js"
+        }
+      ]
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|native-base|react-native-svg|expo-linear-gradient|expo-clipboard|expo-constants|@react-native-async-storage))"
+    ],
+    "moduleNameMapper": {
+      "expo/src/winter/(.*)": "<rootDir>/src/tests/__mocks__/empty.js",
+      "^expo$": "<rootDir>/src/tests/__mocks__/expo.js",
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/src/tests/__mocks__/fileMock.js"
+    }
   },
   "dependencies": {
-    "expo": "~52.0.0",
-    "expo-status-bar": "~2.0.0",
-    "react": "18.3.1",
-    "react-native": "0.76.3",
-    "react-native-safe-area-context": "4.12.0",
+    "@expo/metro-runtime": "~6.1.2",
+    "@prajashakti/shared": "*",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
     "@react-navigation/native-stack": "^7.0.0",
-    "@react-navigation/bottom-tabs": "^7.0.0",
-    "react-native-screens": "~4.1.0",
-    "@prajashakti/shared": "*"
+    "expo": "~54.0.0",
+    "expo-camera": "~17.0.10",
+    "expo-clipboard": "~8.0.8",
+    "expo-file-system": "~19.0.21",
+    "expo-image-manipulator": "~14.0.8",
+    "expo-image-picker": "~17.0.10",
+    "expo-linear-gradient": "~15.0.8",
+    "expo-local-authentication": "~17.0.8",
+    "expo-location": "~19.0.8",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "~0.21.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.0"
+    "@babel/core": "^7.25.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
+    "jest": "^30.3.0",
+    "jest-expo": "^54.0.17",
+    "react-test-renderer": "^19.1.0"
   }
 }

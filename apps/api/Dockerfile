@@ -23,8 +23,7 @@ RUN addgroup -S prajashakti && adduser -S api -G prajashakti
 
 # Copy workspace resolution metadata
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules 2>/dev/null || true
-COPY --from=deps /app/packages/shared/node_modules ./packages/shared/node_modules 2>/dev/null || true
+COPY package.json ./
 
 # Copy source
 COPY packages/shared ./packages/shared

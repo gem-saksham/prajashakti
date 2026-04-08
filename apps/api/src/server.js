@@ -1,74 +1,45 @@
 import 'dotenv/config';
-import Fastify from 'fastify';
-import cors from '@fastify/cors';
-import helmet from '@fastify/helmet';
-import rateLimit from '@fastify/rate-limit';
-import jwt from '@fastify/jwt';
-import healthRoutes from './routes/health.js';
-import userRoutes from './routes/users.js';
+import { buildApp } from './app.js';
+import { closePool } from './db/postgres.js';
+import redis from './db/redis.js';
+import { runSecurityChecks } from './utils/securityCheck.js';
 
-const fastify = Fastify({
-  logger: {
-    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-    transport:
-      process.env.NODE_ENV !== 'production'
-        ? { target: 'pino-pretty', options: { colorize: true } }
-        : undefined,
-  },
-});
+// ─── Security checks (exits if misconfigured in production) ───────────────────
 
-// ─── Plugins ───
-await fastify.register(cors, {
-  origin: process.env.NODE_ENV === 'production' ? ['https://prajashakti.in'] : true,
-  credentials: true,
-});
+runSecurityChecks();
 
-await fastify.register(helmet);
+// ─── Build app ────────────────────────────────────────────────────────────────
 
-await fastify.register(rateLimit, {
-  max: 100,
-  timeWindow: '1 minute',
-});
+const fastify = await buildApp();
 
-await fastify.register(jwt, {
-  secret: process.env.JWT_SECRET || 'dev-secret-change-me',
-  sign: { expiresIn: process.env.JWT_EXPIRES_IN || '7d' },
-});
+// ─── Graceful Shutdown ────────────────────────────────────────────────────────
 
-// ─── Auth decorator ───
-fastify.decorate('authenticate', async (request, reply) => {
-  try {
-    await request.jwtVerify();
-  } catch (err) {
-    reply.status(401).send({ error: 'Unauthorized', message: 'Invalid or expired token' });
-  }
-});
-
-// ─── Routes ───
-await fastify.register(healthRoutes, { prefix: '/api' });
-await fastify.register(userRoutes, { prefix: '/api/users' });
-
-// ─── Start ───
-const start = async () => {
-  try {
-    const port = parseInt(process.env.PORT || '3000', 10);
-    const host = process.env.HOST || '0.0.0.0';
-    await fastify.listen({ port, host });
-    console.info(`
-    ┌─────────────────────────────────────────┐
-    │                                         │
-    │   प्रजाशक्ति API Server                    │
-    │   Running on http://${host}:${port}        │
-    │   Environment: ${process.env.NODE_ENV || 'development'}            │
-    │                                         │
-    └─────────────────────────────────────────┘
-    `);
-  } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
+const shutdown = async (signal) => {
+  fastify.log.warn(`[server] ${signal} received — shutting down`);
+  await fastify.close();
+  await closePool();
+  await redis.quit();
+  fastify.log.warn('[server] shutdown complete');
+  process.exit(0);
 };
 
-start();
+process.on('SIGINT', () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+
+// ─── Start ────────────────────────────────────────────────────────────────────
+
+const port = parseInt(process.env.PORT || '3000', 10);
+const host = process.env.HOST || '0.0.0.0';
+
+await fastify.listen({ port, host });
+
+console.info(`
+┌─────────────────────────────────────────┐
+│                                         │
+│   प्रजाशक्ति API Server  v1               │
+│   http://${host}:${port}/api/v1/status  │
+│   Env: ${(process.env.NODE_ENV || 'development').padEnd(31)}│
+│                                         │
+└─────────────────────────────────────────┘`);
 
 export default fastify;

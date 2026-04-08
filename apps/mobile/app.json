@@ -14,15 +14,37 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "in.prajashakti.app"
+      "bundleIdentifier": "in.prajashakti.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "PrajaShakti needs camera access to capture issue evidence and your profile photo.",
+        "NSPhotoLibraryUsageDescription": "PrajaShakti needs photo library access to upload evidence and your profile photo.",
+        "NSLocationWhenInUseUsageDescription": "PrajaShakti uses your location to find issues near you.",
+        "NSMicrophoneUsageDescription": "PrajaShakti needs microphone access to record video evidence.",
+        "NSFaceIDUsageDescription": "PrajaShakti uses Face ID so you can log in without entering an OTP every time.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#0D4F4F"
       },
       "package": "in.prajashakti.app",
-      "permissions": ["CAMERA", "ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+      "usesCleartextTraffic": true,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "RECORD_AUDIO",
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT"
+      ]
     },
-    "plugins": ["expo-router"]
+    "extra": {
+      "apiUrl": "http://localhost:3000"
+    }
   }
 }

@@ -1,117 +1,139 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+  Keyboard,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ScreenHeader from '../components/ScreenHeader';
+import PhoneInput from '../components/PhoneInput';
+import Button from '../components/Button';
+import { useToast } from '../components/Toast';
+import { authApi } from '../utils/api';
+import { validators } from '../utils/validation';
+import { COLORS, FONTS, SPACING } from '../theme';
 
-const COLORS = {
-  deepTeal: '#0D4F4F',
-  teal: '#14897A',
-  crimson: '#DC143C',
-  bg: '#F4F5F0',
-  white: '#FFFFFF',
-  border: 'rgba(0,0,0,0.1)',
-  textPrimary: '#1a1a1a',
-  textSecondary: '#555',
-  textMuted: '#888',
-};
-
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
+  const insets = useSafeAreaInsets();
+  const { show } = useToast();
   const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState('');
-  const [step, setStep] = useState('phone'); // 'phone' | 'otp'
+  const [loading, setLoading] = useState(false);
+  const [phoneApiErr, setPhoneApiErr] = useState('');
 
-  const handleSendOtp = () => {
-    // TODO (Day 12): Call API /users/login or /users/register
-    if (phone.length === 10) setStep('otp');
-  };
+  const phoneErr = phone.length > 0 ? validators.phone(phone) : null;
+  const canSubmit = !validators.phone(phone);
 
-  const handleVerifyOtp = () => {
-    // TODO (Day 12): Call API /users/verify-otp, store token
-  };
+  const handleSendOtp = useCallback(async () => {
+    if (!canSubmit || loading) return;
+    Keyboard.dismiss();
+    setPhoneApiErr('');
+    setLoading(true);
+    try {
+      const res = await authApi.login(phone);
+      navigation.navigate('VerifyOtp', {
+        phone,
+        flow: 'login',
+        debugOtp: res?.debug_otp,
+      });
+    } catch (err) {
+      const msg = err?.error?.message ?? 'Something went wrong. Please try again.';
+      if (err.status === 429) {
+        show({ message: 'Too many attempts. Try again later.', type: 'warning' });
+      } else {
+        setPhoneApiErr(msg);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [canSubmit, loading, phone, navigation, show]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.logo}>प्रजाशक्ति</Text>
-        <Text style={styles.tagline}>POWER OF THE CITIZENS</Text>
-      </View>
+    <KeyboardAvoidingView
+      style={styles.flex}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScreenHeader title="Log In" onBack={() => navigation.goBack()} transparent />
 
-      <View style={styles.card}>
-        <Text style={styles.title}>
-          {step === 'phone' ? 'Welcome to PrajaShakti' : 'Enter OTP'}
-        </Text>
-        <Text style={styles.subtitle}>
-          {step === 'phone'
-            ? 'Enter your phone number to get started'
-            : `We sent a code to +91 ${phone}`}
-        </Text>
+      <ScrollView
+        contentContainerStyle={[styles.scroll, { paddingBottom: insets.bottom + 32 }]}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.heading}>Welcome back</Text>
+        <Text style={styles.sub}>Enter your phone number to continue</Text>
 
-        {step === 'phone' ? (
-          <>
-            <View style={styles.phoneRow}>
-              <Text style={styles.prefix}>+91</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Phone number"
-                placeholderTextColor={COLORS.textMuted}
-                keyboardType="phone-pad"
-                maxLength={10}
-                value={phone}
-                onChangeText={setPhone}
-              />
-            </View>
-            <TouchableOpacity
-              style={[styles.button, phone.length !== 10 && styles.buttonDisabled]}
-              onPress={handleSendOtp}
-              disabled={phone.length !== 10}
-            >
-              <Text style={styles.buttonText}>Send OTP</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <>
-            <TextInput
-              style={[styles.input, { textAlign: 'center', letterSpacing: 8, fontSize: 24 }]}
-              placeholder="000000"
-              placeholderTextColor={COLORS.textMuted}
-              keyboardType="number-pad"
-              maxLength={6}
-              value={otp}
-              onChangeText={setOtp}
-            />
-            <TouchableOpacity
-              style={[styles.button, otp.length !== 6 && styles.buttonDisabled]}
-              onPress={handleVerifyOtp}
-              disabled={otp.length !== 6}
-            >
-              <Text style={styles.buttonText}>Verify & Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setStep('phone')}>
-              <Text style={styles.link}>Change phone number</Text>
-            </TouchableOpacity>
-          </>
-        )}
-      </View>
+        <PhoneInput
+          value={phone}
+          onChangeText={(t) => {
+            setPhone(t);
+            setPhoneApiErr('');
+          }}
+          error={phoneErr || phoneApiErr}
+          autoFocus
+          returnKeyType="done"
+          onSubmitEditing={handleSendOtp}
+          style={styles.field}
+        />
 
-      <Text style={styles.footer}>
-        By continuing, you agree to PrajaShakti's Terms of Service
-      </Text>
-    </SafeAreaView>
+        <Button
+          label="Send OTP"
+          onPress={handleSendOtp}
+          disabled={!canSubmit}
+          loading={loading}
+          style={styles.btn}
+        />
+
+        {/* 404 shortcut */}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Register', { phone })}
+          style={styles.switchLink}
+        >
+          <Text style={styles.switchText}>
+            New to PrajaShakti? <Text style={styles.switchHighlight}>Create account</Text>
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.bg, justifyContent: 'center', padding: 20 },
-  header: { alignItems: 'center', marginBottom: 32 },
-  logo: { fontSize: 40, fontWeight: '800', color: COLORS.deepTeal },
-  tagline: { fontSize: 11, color: COLORS.teal, letterSpacing: 3, fontWeight: '600', marginTop: 4 },
-  card: { backgroundColor: COLORS.white, borderRadius: 16, padding: 24, marginBottom: 16 },
-  title: { fontSize: 22, fontWeight: '700', color: COLORS.textPrimary, marginBottom: 6 },
-  subtitle: { fontSize: 14, color: COLORS.textSecondary, marginBottom: 20, lineHeight: 20 },
-  phoneRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 16 },
-  prefix: { fontSize: 16, fontWeight: '600', color: COLORS.textPrimary, marginRight: 8, padding: 14, backgroundColor: COLORS.bg, borderRadius: 10 },
-  input: { flex: 1, padding: 14, fontSize: 16, borderRadius: 10, borderWidth: 1, borderColor: COLORS.border, backgroundColor: COLORS.bg, color: COLORS.textPrimary },
-  button: { backgroundColor: COLORS.deepTeal, padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 8 },
-  buttonDisabled: { opacity: 0.5 },
-  buttonText: { color: COLORS.white, fontSize: 16, fontWeight: '700' },
-  link: { color: COLORS.teal, textAlign: 'center', marginTop: 16, fontSize: 14, fontWeight: '600' },
-  footer: { textAlign: 'center', fontSize: 12, color: COLORS.textMuted, marginTop: 16 },
+  flex: { flex: 1, backgroundColor: COLORS.pageBg },
+  scroll: {
+    paddingHorizontal: SPACING.xl,
+    paddingTop: SPACING.lg,
+    gap: 4,
+  },
+  heading: {
+    color: COLORS.textPrimary,
+    fontSize: 24,
+    fontWeight: FONTS.weight.heavy,
+    marginBottom: 4,
+  },
+  sub: {
+    color: COLORS.textSecondary,
+    fontSize: FONTS.size.md,
+    lineHeight: 22,
+    marginBottom: SPACING.lg,
+  },
+  field: { marginBottom: SPACING.md },
+  btn: { marginTop: SPACING.sm },
+  switchLink: {
+    alignSelf: 'center',
+    marginTop: SPACING.lg,
+    paddingVertical: 4,
+  },
+  switchText: {
+    color: COLORS.textSecondary,
+    fontSize: FONTS.size.sm,
+  },
+  switchHighlight: {
+    color: COLORS.teal,
+    fontWeight: FONTS.weight.semibold,
+  },
 });
