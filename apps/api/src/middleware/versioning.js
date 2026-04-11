@@ -15,6 +15,7 @@ import locationRoutes from '../routes/location.js';
 import mediaRoutes from '../routes/media.js';
 import issueRoutes from '../routes/issues.js';
 import governmentRoutes from '../routes/government.js';
+import photoRoutes from '../routes/photos.js';
 
 export default async function v1Routes(fastify, _opts) {
   // ── Status / health ───────────────────────────────────────────────────────
@@ -31,6 +32,9 @@ export default async function v1Routes(fastify, _opts) {
 
   // ── Issues (Sprint 2) ─────────────────────────────────────────────────────
   await fastify.register(issueRoutes, { prefix: '/issues' });
+
+  // ── Issue photo uploads (Sprint 2) ────────────────────────────────────────
+  await fastify.register(photoRoutes, { prefix: '/issues/:issueId/photos' });
 
   // ── Government taxonomy (Sprint 2) ───────────────────────────────────────
   await fastify.register(governmentRoutes, { prefix: '/government' });
