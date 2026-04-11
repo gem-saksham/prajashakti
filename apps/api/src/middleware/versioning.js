@@ -13,6 +13,8 @@ import statusRoutes from '../routes/status.js';
 import userRoutes from '../routes/users.js';
 import locationRoutes from '../routes/location.js';
 import mediaRoutes from '../routes/media.js';
+import issueRoutes from '../routes/issues.js';
+import governmentRoutes from '../routes/government.js';
 
 export default async function v1Routes(fastify, _opts) {
   // ── Status / health ───────────────────────────────────────────────────────
@@ -27,8 +29,13 @@ export default async function v1Routes(fastify, _opts) {
   // ── Media proxy (dev only — proxies S3/LocalStack through API port) ────────
   await fastify.register(mediaRoutes, { prefix: '/media' });
 
+  // ── Issues (Sprint 2) ─────────────────────────────────────────────────────
+  await fastify.register(issueRoutes, { prefix: '/issues' });
+
+  // ── Government taxonomy (Sprint 2) ───────────────────────────────────────
+  await fastify.register(governmentRoutes, { prefix: '/government' });
+
   // Future routes plugged in here:
-  // await fastify.register(issueRoutes,   { prefix: '/issues' });
   // await fastify.register(officialRoutes,{ prefix: '/officials' });
   // await fastify.register(debateRoutes,  { prefix: '/debates' });
 }
