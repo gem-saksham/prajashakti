@@ -1,0 +1,46 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - name: "Warmup"
+      duration: 15
+      arrivalRate: 1
+    - name: "Measure"
+      duration: 60
+      arrivalRate: 1
+      rampTo: 1.5
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Issue list (realistic citizen browse)"
+    weight: 60
+    flow:
+      - get:
+          url: "/api/v1/issues?page=1&limit=20"
+          expect: [{ statusCode: 200 }]
+      - think: 2
+      - get:
+          url: "/api/v1/issues?category=Infrastructure&page=1&limit=20"
+          expect: [{ statusCode: 200 }]
+      - think: 1
+      - get:
+          url: "/api/v1/issues/nearby?lat=28.6139&lng=77.2090&radius=10"
+          expect: [{ statusCode: 200 }]
+
+  - name: "Feed trending"
+    weight: 40
+    flow:
+      - get:
+          url: "/api/v1/feed?mode=trending&limit=20"
+          expect: [{ statusCode: 200 }]
+      - think: 2
+      - get:
+          url: "/api/v1/feed?mode=latest&limit=20"
+          expect: [{ statusCode: 200 }]
+      - think: 1
+      - get:
+          url: "/api/v1/issues/stats"
+          expect: [{ statusCode: 200 }]

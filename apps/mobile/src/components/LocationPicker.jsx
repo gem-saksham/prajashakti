@@ -144,7 +144,7 @@ export default function LocationPicker({ value, onChange }) {
         <View style={styles.dropdown}>
           <FlatList
             data={results}
-            keyExtractor={(item, i) => item.displayName ?? String(i)}
+            keyExtractor={(item, i) => `${item.lat ?? 'x'},${item.lng ?? 'y'}-${i}`}
             renderItem={({ item, index }) => (
               <TouchableOpacity
                 style={[styles.result, index < results.length - 1 && styles.resultBorder]}

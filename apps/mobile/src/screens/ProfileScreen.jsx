@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, RefreshControl } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { useAuth } from '../context/AuthContext';
 import { profileApi } from '../utils/api';
 import { useAvatarUpload } from '../hooks/useAvatarUpload';
@@ -97,13 +98,22 @@ export default function ProfileScreen({ navigation }) {
     [user?.id],
   );
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      await Promise.all([loadProfile(), loadActivity(1)]);
-      setLoading(false);
-    })();
-  }, [loadProfile, loadActivity]);
+  const didInitialLoad = useRef(false);
+  useFocusEffect(
+    useCallback(() => {
+      if (!didInitialLoad.current) {
+        didInitialLoad.current = true;
+        (async () => {
+          setLoading(true);
+          await Promise.all([loadProfile(), loadActivity(1)]);
+          setLoading(false);
+        })();
+      } else {
+        // Silent refresh on re-focus (e.g., returning from EditProfile)
+        loadProfile();
+      }
+    }, [loadProfile, loadActivity]),
+  );
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);

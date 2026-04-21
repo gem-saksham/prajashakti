@@ -8,3 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 -- uuid-ossp provides uuid_generate_v4() as an alias — useful for tooling that
 -- expects this function name (e.g., some ORMs).
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- PostGIS for geo-spatial queries (geo-tagged issue feeds, jurisdiction lookup).
+-- Requires postgis/postgis:16-x Docker image.
+CREATE EXTENSION IF NOT EXISTS "postgis";

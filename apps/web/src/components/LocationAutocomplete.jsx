@@ -110,10 +110,10 @@ export default function LocationAutocomplete({
       onChange({
         lat,
         lng,
-        district: data.location.district,
-        state: data.location.state,
-        pincode: data.location.pincode ?? '',
-        displayName: data.location.formattedAddress,
+        district: data.location?.district || '',
+        state: data.location?.state || '',
+        pincode: data.location?.pincode || '',
+        displayName: data.location?.formattedAddress || `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
       });
       setOpen(false);
     } catch (err) {
@@ -179,6 +179,31 @@ export default function LocationAutocomplete({
 
   return (
     <div ref={containerRef} style={{ position: 'relative' }}>
+      {/* Always-visible GPS button above the search box */}
+      <button
+        onClick={handleGps}
+        disabled={gpsLoading}
+        style={{
+          width: '100%',
+          padding: '11px 14px',
+          background: 'rgba(20,137,122,0.06)',
+          border: '1.5px solid rgba(20,137,122,0.2)',
+          borderRadius: 10,
+          textAlign: 'left',
+          fontSize: 13,
+          fontWeight: 600,
+          color: 'var(--color-teal)',
+          cursor: gpsLoading ? 'wait' : 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          fontFamily: 'inherit',
+          marginBottom: 8,
+        }}
+      >
+        {gpsLoading ? <Spinner size="small" /> : '📍'} Use my current location
+      </button>
+
       <div
         style={{
           display: 'flex',
@@ -249,30 +274,6 @@ export default function LocationAutocomplete({
             overflow: 'hidden',
           }}
         >
-          {/* GPS button at top */}
-          <button
-            onClick={handleGps}
-            disabled={gpsLoading}
-            style={{
-              width: '100%',
-              padding: '11px 14px',
-              background: 'rgba(20,137,122,0.06)',
-              border: 'none',
-              borderBottom: '1px solid var(--color-border)',
-              textAlign: 'left',
-              fontSize: 13,
-              fontWeight: 600,
-              color: 'var(--color-teal)',
-              cursor: gpsLoading ? 'wait' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              fontFamily: 'inherit',
-            }}
-          >
-            {gpsLoading ? <Spinner size="small" /> : '📍'} Use my current location
-          </button>
-
           {/* Results */}
           {results.length === 0 && !loading && query.length >= 2 ? (
             <div style={{ padding: '12px 14px', fontSize: 13, color: 'var(--color-text-muted)' }}>

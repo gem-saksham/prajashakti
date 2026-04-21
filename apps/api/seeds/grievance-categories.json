@@ -1,0 +1,900 @@
+[
+  {
+    "name": "Road Repair - Potholes",
+    "slug": "road-repair-potholes",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "URBAN_DEV_ROADS",
+    "default_department_code": "MUNICIPAL_PWD",
+    "keywords": [
+      "pothole",
+      "road",
+      "street",
+      "damaged",
+      "broken",
+      "repair",
+      "गड्ढा",
+      "सड़क",
+      "टूटी सड़क"
+    ],
+    "description": "Potholes, broken roads, damaged streets in urban areas"
+  },
+  {
+    "name": "Road Repair - Rural Roads",
+    "slug": "road-repair-rural",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "RURAL_DEV_ROADS",
+    "default_department_code": "RURAL_DEV_DEPT",
+    "keywords": ["gravel", "village road", "kutcha", "PMGSY", "ग्रामीण सड़क", "गांव"],
+    "description": "Rural roads, PMGSY roads, village connectivity"
+  },
+  {
+    "name": "Street Lighting",
+    "slug": "street-lighting",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "URBAN_DEV_LIGHTING",
+    "default_department_code": "MUNICIPAL_PWD",
+    "keywords": ["streetlight", "light", "dark", "lamp", "LED", "बत्ती", "रोशनी", "अंधेरा"],
+    "description": "Non-functional street lights, dark streets, damaged lamp posts"
+  },
+  {
+    "name": "Drainage and Sewerage",
+    "slug": "drainage-sewerage",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "URBAN_DEV_DRAINAGE",
+    "default_department_code": "MUNICIPAL_PWD",
+    "keywords": ["drain", "sewer", "clogged", "nala", "overflow", "नाला", "गंदा पानी", "सीवर"],
+    "description": "Blocked drains, sewer overflow, waterlogging"
+  },
+  {
+    "name": "Water Supply Issues",
+    "slug": "water-supply-issues",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "PHED_WATER",
+    "default_department_code": "DRINKING_WATER",
+    "keywords": [
+      "water",
+      "supply",
+      "no water",
+      "leakage",
+      "tap",
+      "pipeline",
+      "पानी",
+      "जल",
+      "नल",
+      "टंकी"
+    ],
+    "description": "No water supply, contaminated water, pipe leakages, low pressure"
+  },
+  {
+    "name": "Water Contamination",
+    "slug": "water-contamination",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "PHED_QUALITY",
+    "default_department_code": "DRINKING_WATER",
+    "keywords": [
+      "dirty water",
+      "contaminated",
+      "arsenic",
+      "fluoride",
+      "unsafe",
+      "दूषित पानी",
+      "गंदा पानी"
+    ],
+    "description": "Contaminated drinking water, unsafe water quality"
+  },
+  {
+    "name": "Electricity Supply",
+    "slug": "electricity-supply",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "POWER_SUPPLY",
+    "default_department_code": "POWER_DISCOM",
+    "keywords": [
+      "electricity",
+      "power",
+      "outage",
+      "blackout",
+      "load shedding",
+      "voltage",
+      "बिजली",
+      "कटौती",
+      "लोड शेडिंग"
+    ],
+    "description": "Power outages, frequent cuts, low voltage, transformer issues"
+  },
+  {
+    "name": "Electricity Billing",
+    "slug": "electricity-billing",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "POWER_BILLING",
+    "default_department_code": "POWER_DISCOM",
+    "keywords": ["bill", "meter", "overcharge", "wrong bill", "बिजली बिल", "मीटर", "ज्यादा बिल"],
+    "description": "Inflated electricity bills, faulty meters, billing disputes"
+  },
+  {
+    "name": "Garbage Collection",
+    "slug": "garbage-collection",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "URBAN_DEV_SANITATION",
+    "default_department_code": "SWACHH_BHARAT",
+    "keywords": ["garbage", "waste", "trash", "sanitation", "कचरा", "कूड़ा", "सफाई"],
+    "description": "Garbage not collected, irregular collection schedule"
+  },
+  {
+    "name": "Open Dumping",
+    "slug": "open-dumping",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "URBAN_DEV_WASTE",
+    "default_department_code": "SWACHH_BHARAT",
+    "keywords": ["dumping", "landfill", "garbage dump", "कचरा फेंकना", "डंपिंग"],
+    "description": "Illegal dumping, unauthorized landfills, waste burning"
+  },
+  {
+    "name": "Hospital Services",
+    "slug": "hospital-services",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "HEALTH_HOSPITAL",
+    "default_department_code": "HEALTH_SERVICES",
+    "keywords": [
+      "hospital",
+      "doctor",
+      "medical",
+      "treatment",
+      "emergency",
+      "OPD",
+      "अस्पताल",
+      "डॉक्टर",
+      "इलाज"
+    ],
+    "description": "Poor hospital services, staff shortage, lack of facilities"
+  },
+  {
+    "name": "Medicine Shortage",
+    "slug": "medicine-shortage",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "HEALTH_MEDICINE",
+    "default_department_code": "HEALTH_SERVICES",
+    "keywords": ["medicine", "drug", "pharmacy", "shortage", "दवा", "दवाई", "कमी"],
+    "description": "Non-availability of medicines in government hospitals/dispensaries"
+  },
+  {
+    "name": "Ambulance Services",
+    "slug": "ambulance-services",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "HEALTH_AMBULANCE",
+    "default_department_code": "HEALTH_SERVICES",
+    "keywords": ["ambulance", "108", "emergency", "एम्बुलेंस"],
+    "description": "Ambulance not available, delayed response, 108 not working"
+  },
+  {
+    "name": "Vaccination",
+    "slug": "vaccination",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "HEALTH_VACCINE",
+    "default_department_code": "FAMILY_WELFARE",
+    "keywords": ["vaccine", "vaccination", "immunization", "टीका", "टीकाकरण"],
+    "description": "Vaccination camps not organized, shortage of vaccines"
+  },
+  {
+    "name": "Ayushman Bharat Card",
+    "slug": "ayushman-bharat-card",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "HEALTH_AYUSHMAN",
+    "default_department_code": "AYUSHMAN_BHARAT",
+    "keywords": ["ayushman", "health card", "PMJAY", "insurance", "आयुष्मान", "स्वास्थ्य कार्ड"],
+    "description": "Issues with Ayushman Bharat card, denial of treatment, claim rejection"
+  },
+
+  {
+    "name": "School Infrastructure",
+    "slug": "school-infrastructure",
+    "praja_category": "Education",
+    "cpgrams_category_code": "EDU_SCHOOL_INFRA",
+    "default_department_code": "SCHOOL_EDU",
+    "keywords": ["school", "building", "classroom", "toilet", "स्कूल", "विद्यालय", "कक्षा"],
+    "description": "Dilapidated school buildings, no toilets, broken furniture"
+  },
+  {
+    "name": "Teacher Shortage",
+    "slug": "teacher-shortage",
+    "praja_category": "Education",
+    "cpgrams_category_code": "EDU_TEACHER",
+    "default_department_code": "SCHOOL_EDU",
+    "keywords": ["teacher", "vacancy", "absent", "शिक्षक", "अध्यापक", "कमी"],
+    "description": "Teachers not available, long vacancies, chronic absenteeism"
+  },
+  {
+    "name": "Mid-Day Meal Quality",
+    "slug": "mid-day-meal-quality",
+    "praja_category": "Education",
+    "cpgrams_category_code": "EDU_MDM",
+    "default_department_code": "MID_DAY_MEAL",
+    "keywords": ["mid-day meal", "food", "lunch", "quality", "मिड डे मील", "खाना", "भोजन"],
+    "description": "Poor quality mid-day meals, irregularity, hygiene issues"
+  },
+  {
+    "name": "College Issues",
+    "slug": "college-issues",
+    "praja_category": "Education",
+    "cpgrams_category_code": "EDU_HIGHER",
+    "default_department_code": "HIGHER_EDU",
+    "keywords": [
+      "college",
+      "university",
+      "admission",
+      "fee",
+      "कॉलेज",
+      "विश्वविद्यालय",
+      "दाखिला",
+      "फीस"
+    ],
+    "description": "College admission issues, capitation fees, quality concerns"
+  },
+
+  {
+    "name": "Police Complaint",
+    "slug": "police-complaint",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "POLICE_COMPLAINT",
+    "default_department_code": "POLICE",
+    "keywords": [
+      "police",
+      "FIR",
+      "complaint",
+      "crime",
+      "theft",
+      "पुलिस",
+      "शिकायत",
+      "चोरी",
+      "एफआईआर"
+    ],
+    "description": "FIR not registered, police inaction, harassment"
+  },
+  {
+    "name": "Women Safety",
+    "slug": "women-safety",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "POLICE_WOMEN",
+    "default_department_code": "WOMEN_WELFARE",
+    "keywords": ["women", "safety", "harassment", "eve-teasing", "महिला", "सुरक्षा", "छेड़छाड़"],
+    "description": "Women's safety, harassment, stalking, workplace safety"
+  },
+  {
+    "name": "Cybercrime",
+    "slug": "cybercrime",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "POLICE_CYBER",
+    "default_department_code": "CYBER_SECURITY",
+    "keywords": ["cyber", "online", "fraud", "scam", "hacking", "साइबर", "ठगी", "ऑनलाइन फ्रॉड"],
+    "description": "Online fraud, phishing, social media threats, identity theft"
+  },
+  {
+    "name": "Traffic Management",
+    "slug": "traffic-management",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "POLICE_TRAFFIC",
+    "default_department_code": "POLICE",
+    "keywords": ["traffic", "signal", "parking", "challan", "ट्रैफिक", "सिग्नल", "पार्किंग"],
+    "description": "Traffic signals not working, illegal parking, dangerous intersections"
+  },
+  {
+    "name": "Fire Safety Violations",
+    "slug": "fire-safety-violations",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "FIRE_SAFETY",
+    "default_department_code": "FIRE_SERVICES",
+    "keywords": ["fire", "safety", "building", "NOC", "आग", "अग्नि", "सुरक्षा"],
+    "description": "Buildings without fire NOC, blocked exits, fire hazards"
+  },
+
+  {
+    "name": "Air Pollution",
+    "slug": "air-pollution",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "ENV_AIR",
+    "default_department_code": "POLLUTION_CTRL",
+    "keywords": ["pollution", "air", "smoke", "dust", "AQI", "प्रदूषण", "हवा", "धुआं", "धूल"],
+    "description": "Air pollution, factory emissions, stubble burning, vehicle pollution"
+  },
+  {
+    "name": "Water Pollution",
+    "slug": "water-pollution",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "ENV_WATER",
+    "default_department_code": "POLLUTION_CTRL",
+    "keywords": ["water pollution", "river", "lake", "effluent", "जल प्रदूषण", "नदी", "तालाब"],
+    "description": "River/lake pollution, industrial effluents, sewage in water bodies"
+  },
+  {
+    "name": "Noise Pollution",
+    "slug": "noise-pollution",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "ENV_NOISE",
+    "default_department_code": "POLLUTION_CTRL",
+    "keywords": ["noise", "loudspeaker", "construction", "शोर", "ध्वनि", "लाउडस्पीकर"],
+    "description": "Excessive noise from construction, loudspeakers, factories"
+  },
+  {
+    "name": "Deforestation",
+    "slug": "deforestation",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "ENV_FOREST",
+    "default_department_code": "FOREST_DEPT",
+    "keywords": ["tree", "forest", "cutting", "deforestation", "पेड़", "जंगल", "कटाई"],
+    "description": "Illegal tree cutting, encroachment on forest land"
+  },
+  {
+    "name": "Stray Animals",
+    "slug": "stray-animals",
+    "praja_category": "Environment",
+    "cpgrams_category_code": "ANIMAL_WELFARE",
+    "default_department_code": "ANIMAL_HUSBANDRY",
+    "keywords": ["stray", "dog", "cattle", "animal", "आवारा", "कुत्ता", "गाय", "जानवर"],
+    "description": "Stray dogs/cattle on roads, animal attacks, no animal control"
+  },
+
+  {
+    "name": "Crop Damage",
+    "slug": "crop-damage",
+    "praja_category": "Agriculture",
+    "cpgrams_category_code": "AGRI_CROP",
+    "default_department_code": "AGRI_COOPERATION",
+    "keywords": [
+      "crop",
+      "damage",
+      "compensation",
+      "insurance",
+      "PMFBY",
+      "फसल",
+      "नुकसान",
+      "बीमा",
+      "मुआवजा"
+    ],
+    "description": "Crop damage from floods/drought, insurance claim issues, compensation delays"
+  },
+  {
+    "name": "Fertilizer and Seed Supply",
+    "slug": "fertilizer-seed-supply",
+    "praja_category": "Agriculture",
+    "cpgrams_category_code": "AGRI_INPUT",
+    "default_department_code": "AGRI_COOPERATION",
+    "keywords": ["fertilizer", "seed", "shortage", "urea", "DAP", "खाद", "बीज", "यूरिया"],
+    "description": "Fertilizer/seed shortage, black marketing, counterfeit products"
+  },
+  {
+    "name": "PM-KISAN Benefits",
+    "slug": "pm-kisan-benefits",
+    "praja_category": "Agriculture",
+    "cpgrams_category_code": "AGRI_PMKISAN",
+    "default_department_code": "PM_KISAN",
+    "keywords": ["PM-KISAN", "installment", "payment", "किसान सम्मान", "किस्त", "पैसा"],
+    "description": "PM-KISAN installments not received, e-KYC issues, wrong beneficiary"
+  },
+  {
+    "name": "MSP and Mandi Issues",
+    "slug": "msp-mandi-issues",
+    "praja_category": "Agriculture",
+    "cpgrams_category_code": "AGRI_MARKET",
+    "default_department_code": "AGRI_COOPERATION",
+    "keywords": ["MSP", "mandi", "market", "rate", "procurement", "मंडी", "न्यूनतम समर्थन मूल्य"],
+    "description": "Not getting MSP, mandi corruption, procurement delays"
+  },
+  {
+    "name": "Irrigation Issues",
+    "slug": "irrigation-issues",
+    "praja_category": "Agriculture",
+    "cpgrams_category_code": "AGRI_IRRIGATION",
+    "default_department_code": "WATER_RESOURCES",
+    "keywords": ["irrigation", "canal", "water", "borewell", "सिंचाई", "नहर", "बोरवेल"],
+    "description": "Irrigation canal blockage, water allocation disputes, borewell permits"
+  },
+
+  {
+    "name": "Bribery and Corruption",
+    "slug": "bribery-corruption",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "ANTI_CORRUPTION",
+    "default_department_code": "DARPG",
+    "keywords": ["bribe", "corruption", "money", "dishonesty", "रिश्वत", "भ्रष्टाचार", "घूस"],
+    "description": "Government officials demanding bribes for routine services"
+  },
+  {
+    "name": "Government Office Delays",
+    "slug": "govt-office-delays",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "ADMIN_DELAY",
+    "default_department_code": "DARPG",
+    "keywords": ["delay", "pending", "file", "clearance", "approval", "देरी", "लंबित", "मंजूरी"],
+    "description": "Files pending for months, unnecessary delays in approvals, red tape"
+  },
+  {
+    "name": "Land Records and Revenue",
+    "slug": "land-records-revenue",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "REVENUE_LAND",
+    "default_department_code": "LAND_RESOURCES",
+    "keywords": [
+      "land",
+      "registry",
+      "mutation",
+      "revenue",
+      "property",
+      "जमीन",
+      "रजिस्ट्री",
+      "भूमि",
+      "खतौनी"
+    ],
+    "description": "Land record manipulation, mutation delays, property disputes"
+  },
+  {
+    "name": "Illegal Construction",
+    "slug": "illegal-construction",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "URBAN_ILLEGAL",
+    "default_department_code": "URBAN_DEV",
+    "keywords": ["illegal", "construction", "building", "encroachment", "अवैध निर्माण", "अतिक्रमण"],
+    "description": "Unauthorized construction, bylaw violations, building encroachment"
+  },
+
+  {
+    "name": "Ration Card Issues",
+    "slug": "ration-card-issues",
+    "praja_category": "Other",
+    "cpgrams_category_code": "PDS_RATION",
+    "default_department_code": "FOOD_PDS",
+    "keywords": [
+      "ration",
+      "card",
+      "PDS",
+      "wheat",
+      "rice",
+      "sugar",
+      "राशन",
+      "कार्ड",
+      "गेहूं",
+      "चावल"
+    ],
+    "description": "Ration card not issued, ration not received, PDS shop irregularity"
+  },
+  {
+    "name": "Pension Delays",
+    "slug": "pension-delays",
+    "praja_category": "Other",
+    "cpgrams_category_code": "PENSION_DELAY",
+    "default_department_code": "PENSION_DEPT",
+    "keywords": ["pension", "retirement", "old age", "widow", "पेंशन", "वृद्धावस्था", "विधवा"],
+    "description": "Pension not credited, old-age pension delays, widow pension issues"
+  },
+  {
+    "name": "EPF/PF Withdrawal",
+    "slug": "epf-pf-withdrawal",
+    "praja_category": "Other",
+    "cpgrams_category_code": "LABOUR_EPF",
+    "default_department_code": "EPFO",
+    "keywords": [
+      "EPF",
+      "PF",
+      "provident fund",
+      "withdrawal",
+      "claim",
+      "ईपीएफ",
+      "पीएफ",
+      "भविष्य निधि"
+    ],
+    "description": "EPF withdrawal delays, claim rejection, UAN issues"
+  },
+  {
+    "name": "ESIC Health Insurance",
+    "slug": "esic-health-insurance",
+    "praja_category": "Other",
+    "cpgrams_category_code": "LABOUR_ESIC",
+    "default_department_code": "ESIC",
+    "keywords": ["ESIC", "ESI", "health card", "hospital", "ईएसआई", "स्वास्थ्य बीमा"],
+    "description": "ESIC card issues, hospital denial, claim problems"
+  },
+  {
+    "name": "Railway Ticket Issues",
+    "slug": "railway-ticket-issues",
+    "praja_category": "Other",
+    "cpgrams_category_code": "RAILWAY_TICKET",
+    "default_department_code": "RAILWAY_PASSENGER",
+    "keywords": ["train", "ticket", "IRCTC", "booking", "refund", "ट्रेन", "टिकट", "रिफंड"],
+    "description": "IRCTC issues, refund delays, tatkal problems, overcharging"
+  },
+  {
+    "name": "Railway Cleanliness",
+    "slug": "railway-cleanliness",
+    "praja_category": "Other",
+    "cpgrams_category_code": "RAILWAY_CLEAN",
+    "default_department_code": "RAILWAY_PASSENGER",
+    "keywords": ["train", "dirty", "toilet", "clean", "station", "गंदा", "साफ", "स्टेशन"],
+    "description": "Dirty trains, unclean stations, unhygienic toilets on trains"
+  },
+  {
+    "name": "Railway Safety Issues",
+    "slug": "railway-safety-issues",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "RAILWAY_SAFETY",
+    "default_department_code": "RAILWAY_SAFETY",
+    "keywords": ["railway", "accident", "crossing", "signal", "रेल", "दुर्घटना", "क्रॉसिंग"],
+    "description": "Unmanned railway crossings, missing signals, safety hazards"
+  },
+  {
+    "name": "Postal Services",
+    "slug": "postal-services",
+    "praja_category": "Other",
+    "cpgrams_category_code": "POSTAL",
+    "default_department_code": "POSTAL_SERVICES",
+    "keywords": ["post", "letter", "courier", "delivery", "डाक", "पत्र", "डिलीवरी"],
+    "description": "Post not delivered, speed post delays, money order issues"
+  },
+  {
+    "name": "Telecom and Internet",
+    "slug": "telecom-internet",
+    "praja_category": "Other",
+    "cpgrams_category_code": "TELECOM_SERVICE",
+    "default_department_code": "TELECOM",
+    "keywords": [
+      "telecom",
+      "internet",
+      "mobile",
+      "network",
+      "broadband",
+      "BSNL",
+      "इंटरनेट",
+      "मोबाइल",
+      "नेटवर्क"
+    ],
+    "description": "No network coverage, slow internet, BSNL issues, tower radiation"
+  },
+  {
+    "name": "Income Tax Issues",
+    "slug": "income-tax-issues",
+    "praja_category": "Other",
+    "cpgrams_category_code": "REVENUE_IT",
+    "default_department_code": "REVENUE",
+    "keywords": ["income tax", "refund", "notice", "PAN", "TDS", "इनकम टैक्स", "रिफंड", "नोटिस"],
+    "description": "IT refund delays, wrong notices, PAN card issues"
+  },
+  {
+    "name": "GST Issues",
+    "slug": "gst-issues",
+    "praja_category": "Other",
+    "cpgrams_category_code": "REVENUE_GST",
+    "default_department_code": "GST_COUNCIL",
+    "keywords": ["GST", "tax", "return", "refund", "registration", "जीएसटी", "टैक्स"],
+    "description": "GST registration delays, refund issues, compliance problems"
+  },
+  {
+    "name": "Banking Issues",
+    "slug": "banking-issues",
+    "praja_category": "Other",
+    "cpgrams_category_code": "FINANCE_BANKING",
+    "default_department_code": "FINANCIAL_SRVCS",
+    "keywords": ["bank", "account", "loan", "ATM", "cheque", "बैंक", "खाता", "लोन", "एटीएम"],
+    "description": "Bank account issues, loan harassment, ATM not working, cheque bounce"
+  },
+  {
+    "name": "LPG Gas Supply",
+    "slug": "lpg-gas-supply",
+    "praja_category": "Other",
+    "cpgrams_category_code": "PETROLEUM_LPG",
+    "default_department_code": "LPG_SUBSIDY",
+    "keywords": ["LPG", "gas", "cylinder", "Ujjwala", "subsidy", "गैस", "सिलेंडर", "उज्ज्वला"],
+    "description": "LPG cylinder shortage, delivery delays, subsidy not credited"
+  },
+  {
+    "name": "Passport Issues",
+    "slug": "passport-issues",
+    "praja_category": "Other",
+    "cpgrams_category_code": "MEA_PASSPORT",
+    "default_department_code": null,
+    "keywords": ["passport", "renewal", "appointment", "police verification", "पासपोर्ट"],
+    "description": "Passport application delays, police verification issues, appointment unavailability"
+  },
+  {
+    "name": "Driving License and RC",
+    "slug": "driving-license-rc",
+    "praja_category": "Other",
+    "cpgrams_category_code": "TRANSPORT_DL",
+    "default_department_code": "TRANSPORT_DEPT",
+    "keywords": [
+      "driving license",
+      "DL",
+      "RC",
+      "RTO",
+      "vehicle",
+      "ड्राइविंग लाइसेंस",
+      "आरसी",
+      "आरटीओ"
+    ],
+    "description": "DL/RC delays, RTO corruption, fitness certificate issues"
+  },
+  {
+    "name": "MGNREGA Wages",
+    "slug": "mgnrega-wages",
+    "praja_category": "Other",
+    "cpgrams_category_code": "RURAL_MGNREGA",
+    "default_department_code": "MGNREGA",
+    "keywords": ["MGNREGA", "NREGA", "wages", "work", "job card", "मनरेगा", "मजदूरी", "जॉब कार्ड"],
+    "description": "MGNREGA wages not paid, less work days, job card issues"
+  },
+  {
+    "name": "PM Awas Yojana",
+    "slug": "pm-awas-yojana",
+    "praja_category": "Other",
+    "cpgrams_category_code": "HOUSING_PMAY",
+    "default_department_code": "PMAY_GRAMIN",
+    "keywords": ["PMAY", "housing", "awas", "house", "आवास योजना", "मकान", "घर"],
+    "description": "PMAY application rejected, installment delays, construction quality"
+  },
+  {
+    "name": "National Highway Issues",
+    "slug": "national-highway-issues",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "NH_ROADS",
+    "default_department_code": "NATIONAL_HIGHWAYS",
+    "keywords": ["highway", "NH", "toll", "construction", "हाईवे", "राजमार्ग", "टोल"],
+    "description": "Highway potholes, toll overcharging, delayed construction"
+  },
+  {
+    "name": "Bridge and Flyover",
+    "slug": "bridge-flyover",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "INFRA_BRIDGE",
+    "default_department_code": "NATIONAL_HIGHWAYS",
+    "keywords": ["bridge", "flyover", "overpass", "collapsed", "पुल", "फ्लाईओवर"],
+    "description": "Damaged bridges, dangerous flyovers, structural safety concerns"
+  },
+  {
+    "name": "Public Toilet",
+    "slug": "public-toilet",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "URBAN_TOILET",
+    "default_department_code": "SWACHH_BHARAT",
+    "keywords": ["toilet", "washroom", "urinal", "public", "शौचालय", "टॉयलेट"],
+    "description": "No public toilets, dirty/non-functional toilets, open defecation"
+  },
+  {
+    "name": "Bus Transport",
+    "slug": "bus-transport",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "TRANSPORT_BUS",
+    "default_department_code": "TRANSPORT_DEPT",
+    "keywords": ["bus", "transport", "route", "stop", "बस", "परिवहन", "रूट", "बस स्टॉप"],
+    "description": "Bus not on time, route discontinued, overcrowding, unsafe buses"
+  },
+  {
+    "name": "Disability Access",
+    "slug": "disability-access",
+    "praja_category": "Other",
+    "cpgrams_category_code": "DISABILITY_ACCESS",
+    "default_department_code": "DISABILITY",
+    "keywords": [
+      "disability",
+      "wheelchair",
+      "ramp",
+      "access",
+      "divyang",
+      "विकलांग",
+      "दिव्यांग",
+      "रैम्प"
+    ],
+    "description": "No ramps, inaccessible buildings, disability certificate delays"
+  },
+  {
+    "name": "Senior Citizen Welfare",
+    "slug": "senior-citizen-welfare",
+    "praja_category": "Other",
+    "cpgrams_category_code": "SENIOR_WELFARE",
+    "default_department_code": "SENIOR_CITIZENS",
+    "keywords": ["senior citizen", "elderly", "old age", "बुजुर्ग", "वरिष्ठ नागरिक", "बड़े"],
+    "description": "Senior citizen ID card issues, healthcare for elderly, elder abuse"
+  },
+  {
+    "name": "Consumer Complaint",
+    "slug": "consumer-complaint",
+    "praja_category": "Other",
+    "cpgrams_category_code": "CONSUMER",
+    "default_department_code": "CONSUMER_AFFAIRS",
+    "keywords": [
+      "consumer",
+      "complaint",
+      "product",
+      "service",
+      "overcharge",
+      "उपभोक्ता",
+      "शिकायत",
+      "ठगी"
+    ],
+    "description": "Defective products, overcharging, unfair trade practices, warranty issues"
+  },
+  {
+    "name": "Encroachment on Public Land",
+    "slug": "encroachment-public-land",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "REVENUE_ENCROACH",
+    "default_department_code": "LAND_RESOURCES",
+    "keywords": ["encroachment", "public land", "government land", "अतिक्रमण", "सरकारी जमीन"],
+    "description": "Illegal occupation of government/public land, park encroachment"
+  },
+  {
+    "name": "Flood Relief",
+    "slug": "flood-relief",
+    "praja_category": "Other",
+    "cpgrams_category_code": "DISASTER_FLOOD",
+    "default_department_code": "DISASTER_MGMT",
+    "keywords": ["flood", "relief", "rescue", "बाढ़", "राहत", "बचाव"],
+    "description": "Flood damage, no rescue operations, relief materials not distributed"
+  },
+  {
+    "name": "Earthquake and Disaster",
+    "slug": "earthquake-disaster",
+    "praja_category": "Other",
+    "cpgrams_category_code": "DISASTER_GENERAL",
+    "default_department_code": "DISASTER_MGMT",
+    "keywords": [
+      "earthquake",
+      "disaster",
+      "landslide",
+      "cyclone",
+      "भूकंप",
+      "आपदा",
+      "भूस्खलन",
+      "चक्रवात"
+    ],
+    "description": "Natural disaster relief, rescue, rehabilitation needs"
+  },
+  {
+    "name": "RTI Response Delay",
+    "slug": "rti-response-delay",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "RTI_DELAY",
+    "default_department_code": "DARPG",
+    "keywords": ["RTI", "information", "response", "delay", "आरटीआई", "सूचना", "जवाब"],
+    "description": "RTI application not answered within 30 days, appeal required"
+  },
+  {
+    "name": "Skill Development Program",
+    "slug": "skill-development-program",
+    "praja_category": "Other",
+    "cpgrams_category_code": "SKILL_PROGRAM",
+    "default_department_code": "SKILL_DEV_DEPT",
+    "keywords": ["skill", "training", "PMKVY", "certificate", "कौशल", "प्रशिक्षण", "प्रमाणपत्र"],
+    "description": "Skill training program issues, certificate not issued, placement not provided"
+  },
+  {
+    "name": "Child Labour",
+    "slug": "child-labour",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "CHILD_PROTECTION",
+    "default_department_code": "CHILD_WELFARE",
+    "keywords": ["child", "labour", "minor", "working", "बाल मजदूरी", "बच्चा", "श्रम"],
+    "description": "Child labour instances, exploitation, trafficking"
+  },
+  {
+    "name": "Food Adulteration",
+    "slug": "food-adulteration",
+    "praja_category": "Healthcare",
+    "cpgrams_category_code": "FOOD_SAFETY",
+    "default_department_code": "CONSUMER_AFFAIRS",
+    "keywords": ["food", "adulteration", "FSSAI", "unsafe", "मिलावट", "खाना", "भोजन"],
+    "description": "Adulterated food, expired products sold, FSSAI violations"
+  },
+  {
+    "name": "Airport Services",
+    "slug": "airport-services",
+    "praja_category": "Other",
+    "cpgrams_category_code": "AVIATION_SERVICE",
+    "default_department_code": "AAI",
+    "keywords": ["airport", "flight", "airline", "delay", "cancel", "हवाई अड्डा", "उड़ान"],
+    "description": "Flight delays/cancellations, airport facility issues, baggage loss"
+  },
+  {
+    "name": "Ex-Servicemen Welfare",
+    "slug": "ex-servicemen-welfare",
+    "praja_category": "Other",
+    "cpgrams_category_code": "DEFENCE_ESW",
+    "default_department_code": "DEFENCE_PENSION",
+    "keywords": ["ex-servicemen", "veteran", "military", "ECHS", "पूर्व सैनिक", "सेना", "पेंशन"],
+    "description": "Ex-servicemen pension issues, ECHS healthcare, canteen facilities"
+  },
+  {
+    "name": "Cantonment Board",
+    "slug": "cantonment-board",
+    "praja_category": "Infrastructure",
+    "cpgrams_category_code": "DEFENCE_CANTONMENT",
+    "default_department_code": "CANTONMENT",
+    "keywords": ["cantonment", "military area", "defence", "छावनी", "कैंट"],
+    "description": "Cantonment area civic issues — roads, water, sanitation within defence areas"
+  },
+  {
+    "name": "Tribal Welfare Schemes",
+    "slug": "tribal-welfare-schemes",
+    "praja_category": "Other",
+    "cpgrams_category_code": "TRIBAL_SCHEMES",
+    "default_department_code": "TRIBAL_WELFARE",
+    "keywords": ["tribal", "adivasi", "ST", "forest rights", "आदिवासी", "वनवासी", "जनजाति"],
+    "description": "Tribal welfare scheme delays, Forest Rights Act issues, exploitation"
+  },
+  {
+    "name": "Minority Welfare Schemes",
+    "slug": "minority-welfare-schemes",
+    "praja_category": "Other",
+    "cpgrams_category_code": "MINORITY_SCHEMES",
+    "default_department_code": "MINORITY_WELFARE",
+    "keywords": ["minority", "scholarship", "welfare", "अल्पसंख्यक", "छात्रवृत्ति"],
+    "description": "Minority scholarship delays, welfare scheme access issues"
+  },
+  {
+    "name": "SC/ST Atrocity",
+    "slug": "sc-st-atrocity",
+    "praja_category": "Safety",
+    "cpgrams_category_code": "SC_ST_ATROCITY",
+    "default_department_code": "SC_WELFARE",
+    "keywords": [
+      "SC",
+      "ST",
+      "caste",
+      "atrocity",
+      "discrimination",
+      "दलित",
+      "अत्याचार",
+      "जाति",
+      "भेदभाव"
+    ],
+    "description": "Caste-based discrimination, SC/ST Atrocity Act cases, police inaction"
+  },
+  {
+    "name": "Panchayat Corruption",
+    "slug": "panchayat-corruption",
+    "praja_category": "Corruption",
+    "cpgrams_category_code": "PANCHAYAT_CORRUPT",
+    "default_department_code": "PANCHAYAT_DEPT",
+    "keywords": ["panchayat", "sarpanch", "gram", "village", "पंचायत", "सरपंच", "ग्राम"],
+    "description": "Panchayat fund misuse, sarpanch corruption, development work not done"
+  },
+  {
+    "name": "Solar Panel Subsidy",
+    "slug": "solar-panel-subsidy",
+    "praja_category": "Other",
+    "cpgrams_category_code": "SOLAR_SUBSIDY",
+    "default_department_code": "SOLAR_ENERGY",
+    "keywords": ["solar", "panel", "subsidy", "rooftop", "सोलर", "सौर ऊर्जा", "सब्सिडी"],
+    "description": "Solar panel subsidy delays, installation quality, net metering issues"
+  },
+  {
+    "name": "MSME Registration",
+    "slug": "msme-registration",
+    "praja_category": "Other",
+    "cpgrams_category_code": "MSME_REGISTRATION",
+    "default_department_code": "MSME_DEPT",
+    "keywords": [
+      "MSME",
+      "Udyam",
+      "registration",
+      "small business",
+      "एमएसएमई",
+      "उद्यम",
+      "छोटा व्यवसाय"
+    ],
+    "description": "Udyam/MSME registration issues, loan scheme delays, market access"
+  },
+  {
+    "name": "Digital India Services",
+    "slug": "digital-india-services",
+    "praja_category": "Other",
+    "cpgrams_category_code": "DIGITAL_SERVICES",
+    "default_department_code": "DIGITAL_INDIA",
+    "keywords": ["digital", "e-governance", "CSC", "DigiLocker", "डिजिटल", "ई-गवर्नेंस"],
+    "description": "Digital India portal issues, CSC center problems, e-governance failures"
+  },
+  {
+    "name": "Fishermen Welfare",
+    "slug": "fishermen-welfare",
+    "praja_category": "Agriculture",
+    "cpgrams_category_code": "FISHERIES_WELFARE",
+    "default_department_code": "FISHERIES_DEPT",
+    "keywords": ["fishermen", "fishing", "boat", "marine", "मछुआरा", "मछली", "नाव"],
+    "description": "Fishermen ID card issues, subsidy for boats, marine safety, fishing bans"
+  }
+]

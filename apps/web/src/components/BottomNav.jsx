@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const TABS = [
-  { id: 'feed', icon: '📢', label: 'Feed' },
+  { id: 'feed', icon: '📋', label: 'Issues' },
   { id: 'create', icon: '➕', label: 'Create' },
   { id: 'notifications', icon: '🔔', label: 'Alerts' },
   { id: 'profile', icon: '👤', label: 'Profile' },
@@ -64,16 +64,29 @@ export default function BottomNav({ currentTab, onTabChange }) {
             {isCreate ? (
               <span
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 44,
+                  height: 44,
                   borderRadius: '50%',
-                  background: '#DC143C',
+                  background: isActive
+                    ? 'linear-gradient(135deg, #c01234, #DC143C)'
+                    : 'linear-gradient(135deg, #DC143C, #e83558)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: 20,
+                  fontSize: 22,
                   marginBottom: -2,
-                  boxShadow: '0 2px 8px rgba(220,20,60,0.35)',
+                  marginTop: -6,
+                  boxShadow: '0 3px 12px rgba(220,20,60,0.4)',
+                  transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                  animation: 'none',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.12)';
+                  e.currentTarget.style.boxShadow = '0 5px 18px rgba(220,20,60,0.5)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 3px 12px rgba(220,20,60,0.4)';
                 }}
               >
                 {tab.icon}

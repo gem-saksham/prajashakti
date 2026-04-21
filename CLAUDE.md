@@ -363,3 +363,255 @@ apps/api/src/
 - **fast-jwt:** Does not accept negative `expiresIn` — embed `exp` directly in payload for expired token tests
 - **jsdom + Jest ESM:** Use dynamic `import()` for jsdom; provide `NODE_ENV=test` fallback in sanitiser
 - **Windows + Expo + LocalStack:** Port 4566 blocked by default firewall; use the media proxy pattern
+
+---
+
+## Sprint 2 Day 16 — Issue Data Model (CPGRAMS Taxonomy Foundation)
+
+### Database Schema
+
+Four new tables added in Sprint 2 Day 16:
+
+| Table                  | Purpose                                                    | Rows (seeded) |
+| ---------------------- | ---------------------------------------------------------- | ------------- |
+| `ministries`           | Top-level government hierarchy: Central + State + UT       | ~97           |
+| `departments`          | Service delivery units under each ministry                 | ~167          |
+| `grievance_categories` | Maps citizen issues to CPGRAMS routing codes               | ~75           |
+| `issues`               | Core citizen issue entity (recreated with enhanced schema) | 0             |
+
+### Key Patterns
+
+- **Government taxonomy:** `ministries → departments → grievance_categories`. All nullable FKs on the issues table — populated by user selection (Sprint 2) or NLP classification (Phase 2 Sprint 9).
+- **Tracking IDs JSONB:** `issues.tracking_ids` stores external references (CPGRAMS, state portals, RTI, NCH). Indexed with GIN for `@>` containment queries.
+- **Photos as JSONB:** `issues.photos` is `JSONB DEFAULT '[]'` (changed from TEXT[] in Sprint 1). Each entry is `{url, caption, uploadedAt}`.
+- **Enhanced statuses:** `active → trending → escalated → officially_resolved / citizen_verified_resolved / citizen_disputed → closed`. The Sprint 1 `responded` and `resolved` statuses are replaced.
+- **Seed script:** `npm run seed:taxonomy` in `apps/api`. Idempotent (ON CONFLICT DO UPDATE).
+
+### Models Added
+
+- `src/models/issue.js` — Full CRUD, geo queries (Haversine), JSONB tracking ID ops, atomic counter increments
+- `src/models/government.js` — Ministry/department/category CRUD, ILIKE search, keyword matching
+
+### File Map Update
+
+```
+apps/api/
+  migrations/
+    20260409000011_create-ministries.cjs
+    20260409000012_create-departments.cjs
+    20260409000013_create-grievance-categories.cjs
+    20260409000014_recreate-issues-with-taxonomy.cjs
+  seeds/
+    ministries.json
+    departments.json
+    grievance-categories.json
+  scripts/
+    seed-taxonomy.js
+  src/
+    models/
+      issue.js
+      government.js
+    types/
+      issue.js          ← JSDoc type definitions for Issue entity
+    middleware/
+      validator.js      ← Enhanced with taxonomy schemas, tracking IDs, geo queries
+```
+
+## Phase 2 Preparation (Built in Sprint 2)
+
+The issue schema and taxonomy are designed to support Phase 2 government
+integration with zero schema changes. Key bridge points:
+
+- `issues.ministry_id`, `department_id`, `grievance_category_id` — populated
+  by user in Sprint 2 (dropdown selection) or by NLP in Phase 2 Sprint 9
+- `issues.tracking_ids` JSONB — user-populated after filing on CPGRAMS,
+  polled by Phase 2 Sprint 8 status sync
+- `issues.discrepancy_score` — populated by Phase 2 Sprint 11 Reality Check
+- `ministries`, `departments`, `grievance_categories` — seeded from public
+  sources, expanded over time
+
+When Phase 2 Sprint 7 begins, the data ingestion pipelines will ADD to
+these tables (e.g., from OGD CPGRAMS datasets), not replace them.
+
+---
+
+## Sprint 2 Days 17–22 — Issue Engine (Complete)
+
+### Days 17–18: Issue CRUD + Photo Pipeline
+
+- Full issue CRUD API (create, read, update, soft-delete, list, stats, nearby, jurisdiction, bbox)
+- Multi-photo upload pipeline with EXIF GPS verification (S3 + presigned URLs)
+- 30 route tests, 26 integration flow tests
+
+### Days 19–21: Officials, Supports, Anti-Gaming
+
+- Officials model + routes (CRUD, jurisdiction search, tagging to issues)
+- Support system with weighted votes (unverified 0.5×, verified 1.0×, leader 1.2×, admin 1.3×)
+- Anti-gaming service: velocity spike detection, IP concentration, UA concentration
+- `suspicious_activity` table for moderation queue (Phase 2 Sprint 6)
+- Tag suggestion service: CPGRAMS keyword → ministry/department matching
+
+### Day 22: Security + Docs + Realistic Seed
+
+- **Security regression (63 tests):** IDOR, SQLi, XSS, mass assignment, tracking ID injection, UUID fuzzing, geo bounds, oversized payloads
+- **Docs:** `apps/api/docs/` — PERFORMANCE_BUDGET.md, REDIS_KEYS.md, SLOW_QUERIES.md, PHASE_2_BRIDGES.md, DATA_MODEL.md (Mermaid ER)
+- **Realistic seed:** 200 users, 500 issues, ~6,000 supports — `npm run seed:realistic`
+- **Coverage:** 470 tests, services at 80% statement coverage
+
+### Key Patterns (Sprint 2)
+
+- `logActivity(userId, action, entityType, entityId, metadata)` — **5-arg signature**. Never pass metadata as the third arg; that writes a 200-char JSON string into `entity_type VARCHAR(30)`.
+- `CREATE INDEX CONCURRENTLY` cannot run inside a transaction block — node-pg-migrate wraps every migration in BEGIN/COMMIT. Use plain `CREATE INDEX IF NOT EXISTS` in migration files; apply CONCURRENTLY manually in production.
+- Fastify `removeAdditional: 'all'` strips unknown body fields silently (no 400) — security tests verify the field is absent in DB, not that a 400 was returned.
+- Sanitiser runs `preValidation` — `validator.escape()` truncates fields to `maxLength` before Fastify schema validation runs, so oversized inputs return 201 (truncated) not 400.
+
+---
+
+## Sprint 3 Day 23 — Ranked Feed API
+
+### New endpoint: `GET /api/v1/feed`
+
+**Feed modes** (query param `mode`):
+| Mode | Behaviour |
+|------|-----------|
+| `trending` (default) | Composite score: engagement + urgency + recency + location trust |
+| `latest` | Newest first, score still computed |
+| `critical` | Only urgency ∈ {critical, high}, sorted by score |
+| `nearby` | Geo-filtered (requires `lat`/`lng`), sorted by score; includes `distanceKm` |
+
+**Scoring formula (SQL, in `FEED_SCORE_EXPR`):**
+
+```
+LN(1 + supporter_count) × 0.4   — engagement
+LN(1 + view_count)      × 0.1   — views
+urgency_boost           × 0.3   — critical=4, high=3, medium=2, low=1
+is_verified_location    × 0.1   — EXIF-verified trust signal
+recency_decay           × 0.1   — 1/(1 + days_old × 0.1)
+```
+
+**Optional filters:** `category`, `urgency`, `state`, `district`, `is_campaign`
+**Pagination:** `page`, `limit` (max 50)
+**Cache:** Redis, per-mode TTL — trending 30 s, nearby 45 s, latest/critical 60 s
+
+**Response shape:**
+
+```json
+{
+  "success": true,
+  "data": [{ ...issue, "feedScore": 2.341, "distanceKm": 1.234 }],
+  "pagination": { "page": 1, "limit": 20, "total": 500, "totalPages": 25 },
+  "meta": { "mode": "nearby", "lat": 28.61, "lng": 77.20, "radiusKm": 20 }
+}
+```
+
+### Files added (Day 23)
+
+```
+apps/api/src/
+  models/issue.js         ← findFeed() — SQL scoring formula, all 4 modes
+  services/feedService.js ← getFeed(), invalidateFeedCache() (SCAN+DEL pattern)
+  routes/feed.js          ← GET /api/v1/feed (optionalAuth)
+  utils/cacheKey.js       ← feedCacheKey(), FEED_TTL constants
+  middleware/validator.js ← feedQuerySchema
+  middleware/versioning.js← registered under /feed prefix
+tests/routes/feed.test.js  — 30 integration tests (all modes, filters, pagination, cache, auth)
+```
+
+### Test count
+
+**470 total** (440 pre-Day-23 + 30 feed tests)
+
+---
+
+## Sprint 2 Days 24–30 — Web UI, Mobile UX, Review (Complete)
+
+### Days 24–26: Web Issue Surface
+
+- 4-step issue creation wizard with draft autosave to localStorage
+- Issue list with URL-synced filter chips + infinite scroll
+- Issue detail page with photo lightbox, map, timeline, quick-support
+- Shared filter URLs (`/issues?category=infrastructure&state=DL`) rehydrate correctly
+
+### Day 27: Mobile Photo-First Creation
+
+- Capture-first flow: camera/gallery → location → category → review
+- EXIF GPS preserved through Expo ImageManipulator
+- Offline draft queue (AsyncStorage) with NetInfo-based auto-drain
+
+### Day 28: Mobile Native UX Enhancements
+
+- Swipe actions on `SwipeableIssueCard` — right=Support (teal), left=Share (orange)
+- Pinch-to-zoom photo gallery with GPS overlay + long-press save-to-device
+- Deep linking: `prajashakti://issues/:id` + `https://prajashakti.in/issues/:id`
+- Offline issue cache (50 issues, 24h TTL) + queued support actions (collapse by last-write)
+- Haptics: Medium on support, Success on milestones [50,100,250,500,1000,2500,5000,10000], selection on refresh/category
+- FlatList tuned: windowSize=5, maxToRenderPerBatch=10, removeClippedSubviews on Android
+- `useNotificationDeepLink` hook: tap push notification → `globalThis.__navigateToIssue(issueId)`
+
+### Day 30: Sprint 2 Review
+
+- **Final test count:** 470 tests, 16 suites, all green
+- **Coverage:** 67.16% statements (below 75% target — gaps in searchService/storyService/stub routes, documented in `docs/SPRINT_2_COVERAGE.md`)
+- **Bug triage:** 0 P0, 0 P1 open (1 P1 caught+fixed mid-session — Animated.Value render error in SwipeableIssueCard), 8 P2 deferred to Sprint 3 backlog
+- **Docs:** `docs/SPRINT_2_QA.md` (regression matrix), `docs/SPRINT_2_COVERAGE.md`, `docs/retrospectives/SPRINT_2.md`, `docs/SPRINT_3_KICKOFF.md`, `docs/API.md` (44 endpoints documented), `apps/api/docs/PHASE_2_BRIDGES.md` (9 bridges)
+- **Sprint 3 backlog (P2):** SRCH-001, STOR-001, PHOT-001, GOV-001, RATE-001, PERF-001, pg_stat_statements, ai.js route
+
+### Key Patterns (Days 24–30)
+
+- Mobile `<Animated.View>` required when consuming `Animated.Value` on transform prop — passing to plain `<View>` throws `ATransform with key of 'scale' must be number`.
+- Swipeable `dragX.interpolate(...)` returns an Animated.Value; wrap the scaling children in `Animated.View`, not `View`.
+- Offline support queue: `Map`-based collapse per issueId (last-write-wins) prevents unbounded queue growth when a user rapidly toggles support while offline.
+- React Navigation `linking` config with nested `FeedTab.IssueDetail: 'issues/:id'` handles both `prajashakti://` and `https://prajashakti.in` prefixes; the notification deep-link path uses `globalThis.__navigateToIssue` exposed by `RootNavigator`.
+- AsyncStorage cache keys: `prajashakti_issue_list_cache` (page 1 only, 24h TTL), `prajashakti_issue_detail_{id}`, `prajashakti_support_queue`.
+
+---
+
+## Sprint 2 Days 28–30 — Mobile Native UX + Sprint Review (Complete 2026-04-21)
+
+### Day 28 — Mobile native enhancements
+
+- Pull-to-refresh haptic feedback (`Haptics.selectionAsync()` on feed + category change)
+- Swipe actions on IssueCard — right=Support (teal + Medium impact), left=Share (orange)
+  - `SwipeableIssueCard.jsx` wraps `IssueCard` in `Swipeable` from `react-native-gesture-handler`
+  - **Gotcha:** `dragX.interpolate(...)` returns `Animated.Value` — consumer MUST be `<Animated.View>`, not `<View>`, or RN throws `ATransform with key of 'scale' must be number`
+- Native share sheet via `Share.share()` with `prajashakti://issues/:id` deep link + `https://prajashakti.in/issues/:id` web fallback
+- Photo gallery: pinch-zoom (iOS via `ScrollView maximumZoomScale`, cross-platform double-tap 2×), GPS badge overlay, long-press save-to-device via `expo-sharing`
+- Deep linking: `app.json` scheme + React Navigation `linking` config with nested screens (`FeedTab.IssueDetail: 'issues/:id'`)
+- FlatList tuning: `windowSize=5`, `maxToRenderPerBatch=10`, `removeClippedSubviews={Platform.OS === 'android'}`, memoized `renderItem`/`keyExtractor`
+- Offline mode:
+  - `services/issueCache.js` — AsyncStorage cache of page-1 feed + per-issue detail, 24h TTL
+  - `services/supportQueue.js` — offline queue, collapse last-wins per issueId, drain on reconnect
+  - `hooks/useNetworkState.js` — NetInfo subscription (starts optimistic to avoid false offline flash)
+  - `components/OfflineBanner.jsx` — crimson banner shown when offline
+  - `hooks/useSupportedIds.js` — enqueues on offline toggle, subscribes to drain on mount
+- Notification tap navigation — `hooks/useNotificationDeepLink.js` lazy-requires `expo-notifications` inside try/catch and calls `globalThis.__navigateToIssue(issueId)` exposed by `RootNavigator`
+
+### Day 30 — Sprint 2 review (QA, bugs, docs)
+
+- Full QA regression matrix — `docs/SPRINT_2_QA.md` (0 P0, 0 P1 open, 8 P2 deferred)
+- Coverage report — `docs/SPRINT_2_COVERAGE.md` (67.16% stmts overall; `searchService` 6% and `storyService` 5% pull average down)
+- Retrospective — `docs/retrospectives/SPRINT_2.md`
+- Sprint 3 kickoff — `docs/SPRINT_3_KICKOFF.md`
+- API docs updated — `docs/API.md` — all 27 Sprint 2 endpoints with curl + response examples
+- Phase 2 bridges doc updated — Section 9 (Feed Bridge) marked DELIVERED
+
+### Sprint 2 final numbers
+
+- **470 tests, 16 suites, all green** (143s runtime)
+- **44 endpoints** total (17 Sprint 1 + 27 Sprint 2)
+- **18 DB tables, 22 migrations**
+- **0 P0 / P1 bugs open**
+- Realistic seed: 202 users, 503 issues, 6,013 supports, 97 ministries, 167 departments, 80 grievance categories
+
+### Sprint 2 P2 backlog (carried to Sprint 3)
+
+| Ticket   | Target                                                |
+| -------- | ----------------------------------------------------- |
+| SRCH-001 | searchService coverage 6% → 80%                       |
+| STOR-001 | storyService + stories route coverage → 60%           |
+| PHOT-001 | photos route coverage 19% → 75%                       |
+| GOV-001  | government route coverage 14% → 75%                   |
+| RATE-001 | rateLimiter coverage 16% → 70% (NODE_ENV override)    |
+| PERF-001 | Artillery nightly job + P95 dashboard                 |
+| (chore)  | Enable pg_stat_statements in dev compose              |
+| (chore)  | ai.js route 4% — intentional (external Anthropic API) |

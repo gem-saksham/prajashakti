@@ -123,6 +123,81 @@ export const locationApi = {
   search: (q) => api(`/location/search?q=${encodeURIComponent(q)}`),
 };
 
+export const issueApi = {
+  create: (data) => api('/issues', { method: 'POST', body: JSON.stringify(data) }),
+  list: (params = {}) => {
+    const qs = new URLSearchParams(
+      Object.fromEntries(Object.entries(params).filter(([, v]) => v != null)),
+    ).toString();
+    return api(`/issues${qs ? '?' + qs : ''}`);
+  },
+  get: (id) => api(`/issues/${id}`),
+  getRelated: (id, limit = 3) => api(`/issues/${id}/related?limit=${limit}`),
+  update: (id, data) => api(`/issues/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  delete: (id) => api(`/issues/${id}`, { method: 'DELETE' }),
+  getFeed: (params = {}) => {
+    const qs = new URLSearchParams(
+      Object.fromEntries(Object.entries(params).filter(([, v]) => v != null)),
+    ).toString();
+    return api(`/feed${qs ? '?' + qs : ''}`);
+  },
+  suggestTags: (data) =>
+    api('/issues/suggest-tags', { method: 'POST', body: JSON.stringify(data) }),
+};
+
+export const photoApi = {
+  requestUploadUrl: (issueId, fileType) =>
+    api(`/issues/${issueId}/photos/upload-url`, {
+      method: 'POST',
+      body: JSON.stringify({ file_type: fileType }),
+    }),
+  confirm: (issueId, fileKey) =>
+    api(`/issues/${issueId}/photos/confirm`, {
+      method: 'POST',
+      body: JSON.stringify({ file_key: fileKey }),
+    }),
+  delete: (issueId, fileKey) => {
+    const encoded = btoa(fileKey).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    return api(`/issues/${issueId}/photos/${encoded}`, { method: 'DELETE' });
+  },
+};
+
+export const officialApi = {
+  search: (q, jurisdiction) => {
+    const params = new URLSearchParams({ q });
+    if (jurisdiction) params.set('jurisdiction', jurisdiction);
+    return api(`/officials?${params}`);
+  },
+};
+
+export const supportApi = {
+  support: (issueId) => api(`/issues/${issueId}/support`, { method: 'POST' }),
+  unsupport: (issueId) => api(`/issues/${issueId}/support`, { method: 'DELETE' }),
+  getStats: (issueId) => api(`/issues/${issueId}/support-stats`),
+  getSupporters: (issueId, page = 1, limit = 20) =>
+    api(`/issues/${issueId}/supporters?page=${page}&limit=${limit}`),
+};
+
+export const aiApi = {
+  generateDraft: (data) => api('/ai/draft', { method: 'POST', body: JSON.stringify(data) }),
+};
+
+export const storyApi = {
+  list: (issueId, page = 1, limit = 20) =>
+    api(`/issues/${issueId}/stories?page=${page}&limit=${limit}`),
+  create: (issueId, data) =>
+    api(`/issues/${issueId}/stories`, { method: 'POST', body: JSON.stringify(data) }),
+  toggleHelpful: (issueId, storyId) =>
+    api(`/issues/${issueId}/stories/${storyId}/helpful`, { method: 'POST' }),
+  remove: (issueId, storyId) => api(`/issues/${issueId}/stories/${storyId}`, { method: 'DELETE' }),
+};
+
+export const searchApi = {
+  suggest: (q, limit = 5) => api(`/search/suggest?q=${encodeURIComponent(q)}&limit=${limit}`),
+  log: (data) => api('/search/log', { method: 'POST', body: JSON.stringify(data) }),
+  click: (data) => api('/search/click', { method: 'POST', body: JSON.stringify(data) }),
+};
+
 /**
  * Upload a file directly to S3 using a pre-signed URL.
  * Uses XMLHttpRequest so we can track progress.

@@ -159,3 +159,145 @@ export const locationApi = {
   reverse: (lat, lng) => api(`/location/reverse?lat=${lat}&lng=${lng}`),
   search: (query) => api(`/location/search?q=${encodeURIComponent(query)}`),
 };
+
+// ─── Query-string helper ──────────────────────────────────────────────────────
+
+function qs(params) {
+  const filtered = Object.entries(params || {}).filter(([, v]) => v != null && v !== '');
+  if (filtered.length === 0) return '';
+  const sp = new URLSearchParams();
+  for (const [k, v] of filtered) sp.set(k, String(v));
+  return `?${sp.toString()}`;
+}
+
+// ─── URL-safe base64 (RN has no `btoa`) ───────────────────────────────────────
+
+function b64UrlEncode(input) {
+  const str = typeof input === 'string' ? input : String(input);
+  // global.Buffer exists in recent RN runtimes; fallback to manual encoder
+  let b64;
+  if (typeof global !== 'undefined' && global.Buffer) {
+    b64 = global.Buffer.from(str, 'utf8').toString('base64');
+  } else {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    let out = '';
+    const bytes = [];
+    for (let i = 0; i < str.length; i++) {
+      const c = str.charCodeAt(i);
+      if (c < 0x80) bytes.push(c);
+      else if (c < 0x800) bytes.push(0xc0 | (c >> 6), 0x80 | (c & 0x3f));
+      else bytes.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 0x3f), 0x80 | (c & 0x3f));
+    }
+    for (let i = 0; i < bytes.length; i += 3) {
+      const b1 = bytes[i];
+      const b2 = bytes[i + 1];
+      const b3 = bytes[i + 2];
+      out += chars[b1 >> 2];
+      out += chars[((b1 & 0x03) << 4) | ((b2 ?? 0) >> 4)];
+      out += b2 === undefined ? '=' : chars[((b2 & 0x0f) << 2) | ((b3 ?? 0) >> 6)];
+      out += b3 === undefined ? '=' : chars[b3 & 0x3f];
+    }
+    b64 = out;
+  }
+  return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
+
+// ─── Issue API ────────────────────────────────────────────────────────────────
+
+export const issueApi = {
+  create: (data) => api('/issues', { method: 'POST', body: JSON.stringify(data) }),
+  list: (params = {}) => api(`/issues${qs(params)}`),
+  get: (id) => api(`/issues/${id}`),
+  getRelated: (id, limit = 3) => api(`/issues/${id}/related?limit=${limit}`),
+  update: (id, data) => api(`/issues/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  delete: (id) => api(`/issues/${id}`, { method: 'DELETE' }),
+  getFeed: (params = {}) => api(`/feed${qs(params)}`),
+  suggestTags: (data) =>
+    api('/issues/suggest-tags', { method: 'POST', body: JSON.stringify(data) }),
+};
+
+// ─── Photo API ────────────────────────────────────────────────────────────────
+
+export const photoApi = {
+  requestUploadUrl: (issueId, fileType) =>
+    api(`/issues/${issueId}/photos/upload-url`, {
+      method: 'POST',
+      body: JSON.stringify({ file_type: fileType }),
+    }),
+  confirm: (issueId, fileKey) =>
+    api(`/issues/${issueId}/photos/confirm`, {
+      method: 'POST',
+      body: JSON.stringify({ file_key: fileKey }),
+    }),
+  delete: (issueId, fileKey) =>
+    api(`/issues/${issueId}/photos/${b64UrlEncode(fileKey)}`, { method: 'DELETE' }),
+};
+
+// ─── Officials API ────────────────────────────────────────────────────────────
+
+export const officialApi = {
+  search: (q, jurisdiction) => {
+    const params = new URLSearchParams({ q });
+    if (jurisdiction) params.set('jurisdiction', jurisdiction);
+    return api(`/officials?${params.toString()}`);
+  },
+};
+
+// ─── Support API ──────────────────────────────────────────────────────────────
+
+export const supportApi = {
+  support: (issueId) => api(`/issues/${issueId}/support`, { method: 'POST' }),
+  unsupport: (issueId) => api(`/issues/${issueId}/support`, { method: 'DELETE' }),
+  getStats: (issueId) => api(`/issues/${issueId}/support-stats`),
+  getSupporters: (issueId, page = 1, limit = 20) =>
+    api(`/issues/${issueId}/supporters?page=${page}&limit=${limit}`),
+};
+
+// ─── AI API ───────────────────────────────────────────────────────────────────
+
+export const aiApi = {
+  generateDraft: (data) => api('/ai/draft', { method: 'POST', body: JSON.stringify(data) }),
+};
+
+// ─── Stories API ──────────────────────────────────────────────────────────────
+
+export const storyApi = {
+  list: (issueId, page = 1, limit = 20) =>
+    api(`/issues/${issueId}/stories?page=${page}&limit=${limit}`),
+  create: (issueId, data) =>
+    api(`/issues/${issueId}/stories`, { method: 'POST', body: JSON.stringify(data) }),
+  toggleHelpful: (issueId, storyId) =>
+    api(`/issues/${issueId}/stories/${storyId}/helpful`, { method: 'POST' }),
+  remove: (issueId, storyId) => api(`/issues/${issueId}/stories/${storyId}`, { method: 'DELETE' }),
+};
+
+// ─── Search API ───────────────────────────────────────────────────────────────
+
+export const searchApi = {
+  suggest: (q, limit = 5) => api(`/search/suggest?q=${encodeURIComponent(q)}&limit=${limit}`),
+  log: (data) => api('/search/log', { method: 'POST', body: JSON.stringify(data) }),
+  click: (data) => api('/search/click', { method: 'POST', body: JSON.stringify(data) }),
+};
+
+/**
+ * Upload a file to S3 using a pre-signed URL (React Native).
+ * Pass a `{ uri, type, name }` object (from expo-image-picker / DocumentPicker)
+ * OR a Blob. Uses XHR so we can report progress.
+ */
+export function uploadToS3(uploadUrl, file, onProgress) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', uploadUrl);
+    xhr.setRequestHeader('Content-Type', file.type ?? 'application/octet-stream');
+    if (onProgress) {
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
+      };
+    }
+    xhr.onload = () =>
+      xhr.status < 300 ? resolve() : reject(new Error(`S3 upload failed: ${xhr.status}`));
+    xhr.onerror = () => reject(new Error('Network error during upload'));
+    // RN: pass the whole file object — fetch/XHR understands { uri, type, name }
+    xhr.send(file);
+  });
+}

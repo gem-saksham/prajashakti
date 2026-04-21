@@ -1,6 +1,6 @@
 import SkeletonCard from '../components/SkeletonCard.jsx';
 
-export default function FeedPlaceholder({ onGoToProfile }) {
+export default function FeedPlaceholder({ onGoToProfile, onCreateIssue }) {
   return (
     <div
       style={{
@@ -40,22 +40,40 @@ export default function FeedPlaceholder({ onGoToProfile }) {
           The civic issues feed, escalation system, and RTI generator are being built. Below is a
           preview of what's coming.
         </p>
-        <button
-          onClick={onGoToProfile}
-          style={{
-            background: 'linear-gradient(135deg, #0D4F4F, #14897A)',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 10,
-            padding: '10px 22px',
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: 'pointer',
-            fontFamily: 'inherit',
-          }}
-        >
-          Complete your profile →
-        </button>
+        <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button
+            onClick={onCreateIssue}
+            style={{
+              background: 'linear-gradient(135deg, #DC143C, #c01234)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 10,
+              padding: '10px 22px',
+              fontSize: 14,
+              fontWeight: 700,
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+            }}
+          >
+            🚩 Report an Issue
+          </button>
+          <button
+            onClick={onGoToProfile}
+            style={{
+              background: 'linear-gradient(135deg, #0D4F4F, #14897A)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 10,
+              padding: '10px 22px',
+              fontSize: 14,
+              fontWeight: 600,
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+            }}
+          >
+            Complete your profile →
+          </button>
+        </div>
       </div>
 
       {/* Skeleton preview cards */}

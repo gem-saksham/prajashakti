@@ -16,6 +16,13 @@ import mediaRoutes from '../routes/media.js';
 import issueRoutes from '../routes/issues.js';
 import governmentRoutes from '../routes/government.js';
 import photoRoutes from '../routes/photos.js';
+import { officialRoutes, issueOfficialRoutes } from '../routes/officials.js';
+import tagSuggestionRoutes from '../routes/tagSuggestion.js';
+import { issueSupportRoutes, userSupportedRoutes } from '../routes/supports.js';
+import feedRoutes from '../routes/feed.js';
+import aiRoutes from '../routes/ai.js';
+import searchRoutes from '../routes/search.js';
+import storyRoutes from '../routes/stories.js';
 
 export default async function v1Routes(fastify, _opts) {
   // ── Status / health ───────────────────────────────────────────────────────
@@ -33,13 +40,34 @@ export default async function v1Routes(fastify, _opts) {
   // ── Issues (Sprint 2) ─────────────────────────────────────────────────────
   await fastify.register(issueRoutes, { prefix: '/issues' });
 
+  // ── Tag suggestion (nested under /issues prefix) ──────────────────────────
+  await fastify.register(tagSuggestionRoutes, { prefix: '/issues' });
+
   // ── Issue photo uploads (Sprint 2) ────────────────────────────────────────
   await fastify.register(photoRoutes, { prefix: '/issues/:issueId/photos' });
+
+  // ── Issue-scoped official tagging ─────────────────────────────────────────
+  await fastify.register(issueOfficialRoutes, { prefix: '/issues/:issueId/officials' });
 
   // ── Government taxonomy (Sprint 2) ───────────────────────────────────────
   await fastify.register(governmentRoutes, { prefix: '/government' });
 
-  // Future routes plugged in here:
-  // await fastify.register(officialRoutes,{ prefix: '/officials' });
-  // await fastify.register(debateRoutes,  { prefix: '/debates' });
+  // ── Officials (Day 20) ────────────────────────────────────────────────────
+  await fastify.register(officialRoutes, { prefix: '/officials' });
+
+  // ── Support system (Day 21) ───────────────────────────────────────────────
+  await fastify.register(issueSupportRoutes, { prefix: '/issues/:id' });
+  await fastify.register(userSupportedRoutes, { prefix: '/users/:userId' });
+
+  // ── Ranked feed (Day 23 / Sprint 3) ──────────────────────────────────────
+  await fastify.register(feedRoutes, { prefix: '/feed' });
+
+  // ── AI features (proxy to Anthropic) ─────────────────────────────────────
+  await fastify.register(aiRoutes, { prefix: '/ai' });
+
+  // ── Search & autocomplete (Day 26) ────────────────────────────────────────
+  await fastify.register(searchRoutes, { prefix: '/search' });
+
+  // ── Ground-reality stories (Day 27) ──────────────────────────────────────
+  await fastify.register(storyRoutes, { prefix: '/issues/:issueId/stories' });
 }

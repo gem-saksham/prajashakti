@@ -1,0 +1,50 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - name: "Viral moment — 1000 supports in 60 seconds"
+      duration: 60
+      arrivalRate: 17
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  variables:
+    # The issue ID to bombard — set this to a real issue ID before running
+    issueId: "REPLACE_WITH_REAL_ISSUE_ID"
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Support spike — unique user per virtual user"
+    weight: 100
+    flow:
+      # Register a fresh user for each VU to ensure unique supports
+      - post:
+          url: "/api/v1/users/register"
+          json:
+            phone: "{{ $randomNumber(7000000000, 9999999999) }}"
+            name: "Spike Test User"
+          capture:
+            - json: "$.debug_otp"
+              as: "otp"
+            - json: "$.phone"
+              as: "phone"
+
+      - post:
+          url: "/api/v1/users/verify-otp"
+          json:
+            phone: "{{ phone }}"
+            otp: "{{ otp }}"
+          capture:
+            - json: "$.accessToken"
+              as: "token"
+          expect:
+            - statusCode: 200
+
+      - post:
+          url: "/api/v1/issues/{{ issueId }}/support"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          expect:
+            - statusCode:
+                - 201
+                - 409   # already supported (duplicate) — acceptable under spike

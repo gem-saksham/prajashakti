@@ -1,0 +1,70 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - name: "Ramp up"
+      duration: 30
+      arrivalRate: 10
+      rampTo: 200
+    - name: "Sustained"
+      duration: 120
+      arrivalRate: 200
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Issue list browsing (no auth)"
+    weight: 60
+    flow:
+      # Browse issue list — cold cache
+      - get:
+          url: "/api/v1/issues?page=1&limit=20"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+      - think: 0.5
+
+      # Filter by category
+      - get:
+          url: "/api/v1/issues?category=Infrastructure&page=1&limit=20"
+          expect:
+            - statusCode: 200
+      - think: 0.3
+
+      # Filter by state
+      - get:
+          url: "/api/v1/issues?state=Delhi&page=1&limit=20"
+          expect:
+            - statusCode: 200
+      - think: 0.3
+
+      # Nearby query
+      - get:
+          url: "/api/v1/issues/nearby?lat=28.6139&lng=77.2090&radius=10"
+          expect:
+            - statusCode: 200
+      - think: 0.5
+
+      # Issue list — page 2 (tests OFFSET pagination)
+      - get:
+          url: "/api/v1/issues?page=2&limit=20"
+          expect:
+            - statusCode: 200
+
+  - name: "Issue detail reads"
+    weight: 40
+    flow:
+      # Get issue stats (cached Redis path)
+      - get:
+          url: "/api/v1/issues/stats"
+          expect:
+            - statusCode: 200
+      - think: 1
+
+      # Bounding box query
+      - get:
+          url: "/api/v1/issues/bbox?min_lat=28.50&min_lng=77.10&max_lat=28.70&max_lng=77.35"
+          expect:
+            - statusCode: 200

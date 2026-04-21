@@ -8,10 +8,13 @@
 
 import * as IssueModel from '../models/issue.js';
 import * as GovModel from '../models/government.js';
+import * as OfficialModel from '../models/official.js';
 import { logActivity } from '../models/userActivity.js';
 import { ServiceError } from './userService.js';
 import { toSnakeCase } from '../utils/transform.js';
 import { issueListCacheKey, issueCacheKey, ISSUE_STATS_KEY } from '../utils/cacheKey.js';
+import { reverseGeocode } from './locationService.js';
+import { isWithinIndia } from '../utils/locationValidator.js';
 import pool from '../db/postgres.js';
 
 // Cache TTLs (seconds)
@@ -72,6 +75,10 @@ function normalizeInput(body) {
     targetSupporters: body.target_supporters,
     campaignDeadline: body.campaign_deadline,
     resolutionNotes: body.resolution_notes,
+    // Official IDs to tag immediately after creation
+    suggestedOfficialIds: Array.isArray(body.suggested_official_ids)
+      ? body.suggested_official_ids
+      : [],
   };
 }
 
@@ -102,6 +109,7 @@ function normalizeUpdateInput(body) {
     target_supporters: 'target_supporters',
     campaign_deadline: 'campaign_deadline',
     resolution_notes: 'resolution_notes',
+    tracking_ids: 'tracking_ids',
   };
   for (const [k, v] of Object.entries(body)) {
     if (mapping[k]) out[mapping[k]] = v;
@@ -113,10 +121,39 @@ function normalizeUpdateInput(body) {
 
 /**
  * Create a new issue.
- * Validates taxonomy IDs, inserts, logs activity.
+ * Validates taxonomy IDs, auto-geocodes if district/state are missing,
+ * enforces India bounding box, inserts, logs activity.
+ *
+ * @param {string} userId
+ * @param {object} body   — snake_case request body
+ * @param {object} redis  — ioredis instance (for geocode caching)
  */
-export async function createIssue(userId, body) {
+export async function createIssue(userId, body, redis = null) {
   const data = normalizeInput(body);
+
+  // Validate coordinates are within India
+  if (data.locationLat != null && data.locationLng != null) {
+    if (!isWithinIndia(data.locationLat, data.locationLng)) {
+      throw new ServiceError(400, 'INVALID_LOCATION', 'Coordinates are outside India');
+    }
+
+    // Auto-geocode: fill district/state/pincode/formattedAddress if missing
+    if (!data.district || !data.state) {
+      try {
+        const geo = redis ? await reverseGeocode(redis, data.locationLat, data.locationLng) : null;
+        if (geo) {
+          if (!data.district && geo.district) data.district = geo.district;
+          if (!data.state && geo.state) data.state = geo.state;
+          if (!data.pincode && geo.pincode) data.pincode = geo.pincode;
+          if (!data.formattedAddress && geo.formattedAddress) {
+            data.formattedAddress = geo.formattedAddress;
+          }
+        }
+      } catch {
+        // Non-fatal: geocoding failure should not block issue creation
+      }
+    }
+  }
 
   await validateTaxonomyIds({
     ministryId: data.ministryId,
@@ -128,9 +165,19 @@ export async function createIssue(userId, body) {
 
   const issue = await IssueModel.create(data);
 
+  // Tag suggested officials — fire-and-forget (non-fatal)
+  if (data.suggestedOfficialIds.length > 0) {
+    Promise.all(
+      data.suggestedOfficialIds.map((officialId) =>
+        OfficialModel.tagToIssue(issue.id, officialId, userId, 'primary')
+          .then(() => OfficialModel.incrementTaggedCount(officialId))
+          .catch(() => {}),
+      ),
+    ).catch(() => {});
+  }
+
   // Fire-and-forget activity log
-  logActivity(userId, 'issue_created', {
-    issueId: issue.id,
+  logActivity(userId, 'issue_created', 'issue', issue.id, {
     category: issue.category,
     district: issue.district,
     state: issue.state,
@@ -261,12 +308,40 @@ export async function getMyIssues(userId, pagination) {
 
 /**
  * Find issues near a GPS location.
+ * Uses PostGIS ST_DWithin when available; falls back to Haversine.
+ *
+ * @param {number} lat
+ * @param {number} lng
+ * @param {number} radiusKm
+ * @param {number} limit
+ * @param {Object} filters  — optional { category, urgency }
  */
-export async function getNearbyIssues(lat, lng, radiusKm = 10, limit = 50) {
-  if (lat < 6 || lat > 38 || lng < 68 || lng > 98) {
+export async function getNearbyIssues(lat, lng, radiusKm = 10, limit = 50, filters = {}) {
+  if (!isWithinIndia(lat, lng)) {
     throw new ServiceError(400, 'INVALID_LOCATION', 'Coordinates are outside India');
   }
-  return IssueModel.findByLocation(lat, lng, radiusKm, limit);
+  return IssueModel.findNearby(lat, lng, radiusKm, filters, limit);
+}
+
+/**
+ * Find issues by administrative jurisdiction.
+ *
+ * @param {string} stateCode
+ * @param {string|null} districtCode
+ * @param {Object} pagination
+ */
+export async function getIssuesByJurisdiction(stateCode, districtCode, pagination) {
+  return IssueModel.findByJurisdiction(stateCode, districtCode, pagination);
+}
+
+/**
+ * Find issues within a geographic bounding box.
+ */
+export async function getIssuesInBoundingBox(minLat, minLng, maxLat, maxLng, limit = 100) {
+  if (!isWithinIndia(minLat, minLng) && !isWithinIndia(maxLat, maxLng)) {
+    throw new ServiceError(400, 'INVALID_LOCATION', 'Bounding box is outside India');
+  }
+  return IssueModel.findInBoundingBox(minLat, minLng, maxLat, maxLng, limit);
 }
 
 /**
@@ -319,4 +394,23 @@ export async function getIssueStats(redis) {
   }
 
   return stats;
+}
+
+/**
+ * Return up to `limit` issues related to the given issue.
+ * Matches on same category OR same district.
+ * Throws 404 if the source issue does not exist.
+ *
+ * @param {string} id      — UUID of the source issue
+ * @param {number} limit   — max results (default 3)
+ */
+export async function getRelatedIssues(id, limit = 3) {
+  const issue = await IssueModel.findById(id);
+  if (!issue) throw new ServiceError(404, 'ISSUE_NOT_FOUND', 'Issue not found');
+
+  return IssueModel.findRelated(id, {
+    category: issue.category,
+    district: issue.district,
+    limit,
+  });
 }

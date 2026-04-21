@@ -1,0 +1,66 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - name: "Warm up"
+      duration: 10
+      arrivalRate: 5
+    - name: "Ramp up"
+      duration: 30
+      arrivalRate: 5
+      rampTo: 50
+    - name: "Sustained load"
+      duration: 30
+      arrivalRate: 50
+  defaults:
+    headers:
+      Content-Type: "application/json"
+  plugins:
+    expect: {}
+
+scenarios:
+  - name: "Issue creation flow"
+    weight: 100
+    flow:
+      # Step 1: Register a new user
+      - post:
+          url: "/api/v1/users/register"
+          json:
+            phone: "{{ $randomNumber(7000000000, 9999999999) }}"
+            name: "Load Test User"
+          capture:
+            - json: "$.debug_otp"
+              as: "otp"
+            - json: "$.phone"
+              as: "phone"
+          expect:
+            - statusCode: 200
+
+      # Step 2: Verify OTP
+      - post:
+          url: "/api/v1/users/verify-otp"
+          json:
+            phone: "{{ phone }}"
+            otp: "{{ otp }}"
+          capture:
+            - json: "$.accessToken"
+              as: "token"
+          expect:
+            - statusCode: 200
+
+      # Step 3: Create an issue
+      - post:
+          url: "/api/v1/issues"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          json:
+            title: "Load test issue — pothole on main road near market"
+            description: "Large pothole on the main road causing accidents. Needs immediate repair."
+            category: "Infrastructure"
+            urgency: "high"
+            location_lat: 28.6139
+            location_lng: 77.2090
+            district: "Central Delhi"
+            state: "Delhi"
+            pincode: "110001"
+          expect:
+            - statusCode: 201

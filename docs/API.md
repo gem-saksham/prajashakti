@@ -560,6 +560,57 @@ Convert GPS coordinates to an address.
 
 ---
 
+### GET /api/v1/location/nearby-issues
+
+Find issues within a radius of a geo point. Geo filter is applied server-side via PostGIS/Haversine; use `/feed?mode=nearby` for the ranked/scored variant.
+
+> Note: this is exposed as `GET /api/v1/issues/nearby` — see Issues section.
+
+---
+
+### GET /api/v1/location/jurisdiction
+
+Rich jurisdiction for a coordinate (state + district + LGD codes). Requires auth.
+
+**Request:**
+
+```
+GET /api/v1/location/jurisdiction?lat=28.6139&lng=77.2090
+Authorization: Bearer <access>
+```
+
+**Response 200:**
+
+```json
+{
+  "success": true,
+  "jurisdiction": {
+    "state": { "code": "DL", "name": "Delhi", "type": "ut" },
+    "district": { "code": "DL01", "name": "New Delhi", "lgdCode": "140" },
+    "zone": "North"
+  }
+}
+```
+
+**Errors:** `400 OUTSIDE_INDIA` if coordinates fall outside the Indian bounding box.
+
+---
+
+### GET /api/v1/location/responsible-departments
+
+Rank departments responsible for a given coordinate + category.
+
+**Request:**
+
+```
+GET /api/v1/location/responsible-departments?lat=28.6&lng=77.2&category=Infrastructure
+Authorization: Bearer <access>
+```
+
+**Response 200:** `{ success, departments: [{ id, name, ministry, score }] }`
+
+---
+
 ### GET /api/v1/location/search
 
 Forward geocoding / location autocomplete for Indian places.
@@ -611,17 +662,521 @@ Serve files from S3 through the API server. Used by clients that cannot reach S3
 
 ---
 
+## Issues
+
+Core citizen-issue entity. CPGRAMS-aligned taxonomy (ministry / department / grievance category) and PostGIS-backed geo queries.
+
+### POST /api/v1/issues
+
+Create a new issue. Requires auth; rate-limited to 5 issues / hour per user.
+
+**Request:**
+
+```
+POST /api/v1/issues
+Authorization: Bearer <access>
+Content-Type: application/json
+
+{
+  "title": "Broken streetlight on MG Road",
+  "description": "Pole #42 has been dark for 3 weeks; area unsafe after dusk.",
+  "category": "Infrastructure",
+  "urgency": "high",
+  "location_lat": 28.6139,
+  "location_lng": 77.2090,
+  "district": "New Delhi",
+  "state": "DL",
+  "ministry_id": "aaaaaaaa-0001-...",
+  "department_id": "bbbbbbbb-0001-...",
+  "grievance_category_id": "cccccccc-0001-...",
+  "tracking_ids": { "cpgrams": "DOPTG/2026/00042" }
+}
+```
+
+**Response 201:** `{ success: true, data: <Issue> }` — full issue with `id`, `supporter_count: 0`, `view_count: 0`, `status: "active"`, joined creator/ministry/department.
+
+**Errors:** `400 VALIDATION_ERROR`, `401 UNAUTHORIZED`, `429 RATE_LIMITED`.
+
+---
+
+### GET /api/v1/issues
+
+List issues with filters, sort, pagination.
+
+**Query params:**
+
+| Param                         | Type   | Default     | Notes                                                                                                         |
+| ----------------------------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| `page`                        | int    | 1           |                                                                                                               |
+| `limit`                       | int    | 20          | max 100                                                                                                       |
+| `sort`                        | enum   | `newest`    | `newest` / `oldest` / `most_supported` / `most_urgent` / `most_viewed`                                        |
+| `category`                    | enum   | —           |                                                                                                               |
+| `urgency`                     | enum   | —           | `low`/`medium`/`high`/`critical`                                                                              |
+| `status`                      | enum   | —           | `active`/`trending`/`escalated`/`officially_resolved`/`citizen_verified_resolved`/`citizen_disputed`/`closed` |
+| `district`, `state`           | string | —           |                                                                                                               |
+| `is_campaign`                 | bool   | —           |                                                                                                               |
+| `search`                      | string | —           | full-text search across title+description                                                                     |
+| `min_support`                 | int    | 0           |                                                                                                               |
+| `date_range`                  | enum   | `all`       | `24h`/`7d`/`30d`/`all`                                                                                        |
+| `has_photos`, `verified_only` | bool   | —           |                                                                                                               |
+| `lat`, `lng`, `radius_km`     | number | radius 10km | geo filter                                                                                                    |
+
+**Response 200:** `{ success, data: Issue[], pagination: { page, limit, total, totalPages } }`.
+
+---
+
+### GET /api/v1/issues/:id
+
+Single issue with creator, ministry, department, category joined. Increments `view_count` (async, deduped per session).
+
+**Response 200:** `{ success, data: <Issue> }`
+
+---
+
+### GET /api/v1/issues/stats
+
+Aggregate counters (public, Redis-cached 60s).
+
+**Response 200:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "total": 503,
+    "active": 420,
+    "trending": 12,
+    "escalated": 5,
+    "resolved": 66,
+    "totalSupporters": 6013
+  }
+}
+```
+
+---
+
+### GET /api/v1/issues/nearby
+
+Geo search within radius. `GET /api/v1/issues/nearby?lat=28.6&lng=77.2&radius_km=5&limit=20`.
+
+**Response 200:** `{ success, data: Issue[], count }` (sorted by distance; each entry includes `distance_km`).
+
+---
+
+### GET /api/v1/issues/jurisdiction
+
+Issues filed under a state / district.
+
+```
+GET /api/v1/issues/jurisdiction?state_code=DL&district_code=DL01&page=1&limit=20
+```
+
+---
+
+### GET /api/v1/issues/bbox
+
+Issues inside a bounding box (for map tiles).
+
+```
+GET /api/v1/issues/bbox?min_lat=28.5&min_lng=77.1&max_lat=28.7&max_lng=77.3&limit=100
+```
+
+---
+
+### GET /api/v1/issues/me
+
+Current user's own issues. Requires auth. Same pagination/sort as `GET /issues`.
+
+---
+
+### GET /api/v1/issues/:id/related
+
+Top-N related issues (same category + geo proximity). `?limit=3` (max 10).
+
+---
+
+### PATCH /api/v1/issues/:id
+
+Update an issue. Only the creator may edit. Mass-assignment stripped — cannot change `status`, `supporter_count`, `view_count`.
+
+**Errors:** `401`, `403 FORBIDDEN` (non-creator), `400 VALIDATION_ERROR`.
+
+---
+
+### DELETE /api/v1/issues/:id
+
+Soft-delete. Sets `status = "closed"` and excludes from default listings. Only the creator or an admin may delete.
+
+---
+
+## Photos
+
+Multi-photo pipeline for issue evidence. S3-backed, EXIF-verified.
+
+### POST /api/v1/issues/:issueId/photos/upload-url
+
+Request a pre-signed S3 PUT URL. Only the issue creator may call. Max 5 photos per issue.
+
+**Request body:** `{ "file_type": "image/jpeg" }` (also `image/png`, `image/webp`).
+
+**Response 200:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "uploadUrl": "https://s3.../issues/<issueId>/<photoKey>.jpg?X-Amz-...",
+    "fileKey": "issues/<issueId>/<photoKey>.jpg",
+    "expiresIn": 900
+  }
+}
+```
+
+---
+
+### POST /api/v1/issues/:issueId/photos/confirm
+
+After a successful PUT to `uploadUrl`, confirm to run EXIF extraction + haversine check vs. issue location. Photo is appended to `issues.photos` JSONB.
+
+**Request body:** `{ "file_key": "issues/<issueId>/<photoKey>.jpg" }`.
+
+**Response 201:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "url": "https://s3.../issues/...",
+    "fileKey": "issues/...",
+    "verified": true,
+    "exifGps": { "lat": 28.614, "lng": 77.209 },
+    "distanceM": 38,
+    "uploadedAt": "2026-04-21T10:12:00Z"
+  }
+}
+```
+
+`verified: false` when EXIF GPS absent or >250m from issue location (`is_verified_location` remains false).
+
+---
+
+### DELETE /api/v1/issues/:issueId/photos/:photoKey
+
+Remove a photo. `photoKey` is base64url-encoded on client so slashes survive URL transport. Creator or admin only.
+
+---
+
+## Government — Taxonomy
+
+Public read-only taxonomy (97 ministries, 167 departments, ~80 grievance categories). Redis-cached 24h.
+
+### GET /api/v1/government/ministries
+
+```
+GET /api/v1/government/ministries?type=central
+```
+
+`type` ∈ `central`, `state`, `ut` (optional).
+
+**Response 200:** `{ success, data: Ministry[], count }`.
+
+---
+
+### GET /api/v1/government/ministries/:id
+
+Single ministry by UUID.
+
+---
+
+### GET /api/v1/government/ministries/search?q=health
+
+ILIKE search on ministry name. Min length 2.
+
+---
+
+### GET /api/v1/government/ministries/:id/departments
+
+Departments under a ministry.
+
+---
+
+### GET /api/v1/government/departments/:id
+
+Single department with ministry info joined.
+
+---
+
+### GET /api/v1/government/departments/search?q=water
+
+---
+
+### GET /api/v1/government/categories
+
+```
+GET /api/v1/government/categories?praja_category=Infrastructure
+```
+
+Optional `praja_category` filter.
+
+---
+
+### GET /api/v1/government/categories/:slug
+
+Single category by slug.
+
+---
+
+### GET /api/v1/government/categories/suggest?q=broken streetlight
+
+NLP keyword → grievance category match. `q` is 3–500 chars. Not cached (dynamic).
+
+**Response 200:** `{ success, data: [{ id, slug, name, score }], count }`.
+
+---
+
+## Officials
+
+Bureaucrat / elected-official directory. Used for tagging officials to issues.
+
+### GET /api/v1/officials
+
+List or search. When `q` is provided, uses fuzzy search; otherwise paginated.
+
+**Query params:** `q`, `state_code`, `district_code`, `jurisdiction_type` (`national`/`state`/`district`/`municipal`/`local`), `page`, `limit`.
+
+**Response 200:** list mode `{ success, data, pagination }`, search mode `{ success, data, count }`.
+
+---
+
+### GET /api/v1/officials/:id
+
+Single official + accountability stats (tagged issues, response times).
+
+---
+
+### POST /api/v1/officials
+
+Create an official. Moderator / admin only.
+
+**Body:** `name`, `designation` (required), optional `department_id`, `ministry_id`, `jurisdiction_type`, `jurisdiction_code`, `state_code`, `district_code`, `public_email`, `public_phone`, `office_address`, `twitter_handle`, `cadre`, `batch_year`, `source`, `is_verified`.
+
+---
+
+### POST /api/v1/officials/:id/claim
+
+Authenticated user requests to claim an official account. Triggers manual verification workflow.
+
+---
+
+### GET /api/v1/issues/:issueId/officials
+
+List officials tagged to an issue (public).
+
+---
+
+### POST /api/v1/issues/:issueId/officials
+
+Tag an official to an issue. Requires auth.
+
+**Body:**
+
+```json
+{ "official_id": "uuid", "tag_type": "primary" }
+```
+
+`tag_type` ∈ `primary`, `escalation`, `mentioned`. Unique (issue, official) — cannot tag the same official twice.
+
+---
+
+### DELETE /api/v1/issues/:issueId/officials/:officialId
+
+Untag. Creator, tagging user, or admin.
+
+---
+
+## Supports
+
+Weighted support counters for an issue.
+
+Weights: unverified user 0.5×, verified 1.0×, leader 1.2×, admin 1.3×. Rate-limited to 60 supports/minute per user.
+
+### POST /api/v1/issues/:id/support
+
+Support an issue. Atomic: PostgreSQL upsert + Redis counter. Emits anti-gaming check.
+
+**Response 201:**
+
+```json
+{
+  "success": true,
+  "data": {
+    "supported": true,
+    "supporterCount": 142,
+    "weight": 1.0,
+    "milestoneReached": null
+  }
+}
+```
+
+`milestoneReached` is one of `{100, 500, 1000, 5000, 10000}` when the count crosses the threshold.
+
+**Errors:** `401`, `409 ALREADY_SUPPORTED`, `400 ISSUE_CLOSED`, `429`.
+
+---
+
+### DELETE /api/v1/issues/:id/support
+
+Remove support. Decrements atomically.
+
+---
+
+### GET /api/v1/issues/:id/supporters
+
+Paginated supporters list. `?page=1&limit=20`. If authenticated, adds `hasSupported` flag.
+
+---
+
+### GET /api/v1/issues/:id/support-stats
+
+```json
+{
+  "success": true,
+  "data": {
+    "supporterCount": 142,
+    "weightedCount": 168.4,
+    "velocity24h": 28,
+    "nextMilestone": 500,
+    "hasSupported": false
+  }
+}
+```
+
+---
+
+### GET /api/v1/users/:userId/supported
+
+Issues a user has supported. Paginated.
+
+---
+
+## Search
+
+### GET /api/v1/search/suggest
+
+Autocomplete suggestions against issues + tags. <100 ms target, Redis-cached.
+
+```
+GET /api/v1/search/suggest?q=street&limit=5
+```
+
+**Response 200:** `{ success, suggestions: [{ id, title, score, type }], cached: boolean }`.
+
+---
+
+### POST /api/v1/search/log
+
+Analytics: record a completed search. Body: `{ query, filters?, resultCount?, sessionId? }`. `200 { success: true }`.
+
+---
+
+### POST /api/v1/search/click
+
+CTR measurement. Body: `{ query, issueId, sessionId? }`.
+
+---
+
+## Tag Suggestions
+
+### POST /api/v1/issues/suggest-tags
+
+Called debounced (500 ms) as the user types the issue creation form. Returns ranked suggestions across grievance categories, ministries, departments, and officials. Rate-limited to 20/hour per user.
+
+**Request body:**
+
+```json
+{
+  "title": "Potholes flooding the road",
+  "description": "Every monsoon the entire stretch from ...",
+  "category": "Infrastructure",
+  "location_lat": 28.6139,
+  "location_lng": 77.209
+}
+```
+
+**Response 200:**
+
+```json
+{
+  "success": true,
+  "suggestions": {
+    "grievanceCategories": [{ "id": "...", "slug": "road-infrastructure", "score": 8.4 }],
+    "ministries": [{ "id": "...", "name": "Ministry of Road Transport & Highways" }],
+    "departments": [{ "id": "...", "name": "PWD — Roads" }],
+    "suggestedOfficials": [{ "id": "...", "name": "...", "designation": "..." }]
+  }
+}
+```
+
+---
+
+## Feed
+
+### GET /api/v1/feed
+
+Ranked composite feed. Optional auth (same feed; personalisation is Phase 2).
+
+**Modes** (query `mode`):
+
+| Mode                 | Behaviour                                                         |
+| -------------------- | ----------------------------------------------------------------- |
+| `trending` (default) | engagement + urgency + recency + location-trust score             |
+| `latest`             | newest first, score still returned                                |
+| `critical`           | urgency ∈ {critical, high}, sorted by score                       |
+| `nearby`             | requires `lat`/`lng`; sorted by score; each item has `distanceKm` |
+
+**Score formula (SQL):**
+
+```
+LN(1 + supporter_count) × 0.4  — engagement
+LN(1 + view_count)      × 0.1  — views
+urgency_boost           × 0.3  — critical=4, high=3, medium=2, low=1
+is_verified_location    × 0.1  — EXIF-verified trust signal
+recency_decay           × 0.1  — 1 / (1 + days_old × 0.1)
+```
+
+**Query params:** `mode`, `lat`, `lng`, `radius_km` (default 20, max 100), `category`, `urgency`, `state`, `district`, `is_campaign`, `page`, `limit` (max 50).
+
+**Cache:** Redis, per-mode TTL — trending 30s, nearby 45s, latest/critical 60s.
+
+**Response 200:**
+
+```json
+{
+  "success": true,
+  "data": [{ "...issue": "...", "feedScore": 2.341, "distanceKm": 1.234 }],
+  "pagination": { "page": 1, "limit": 20, "total": 500, "totalPages": 25 },
+  "meta": { "mode": "nearby", "lat": 28.61, "lng": 77.2, "radiusKm": 20 }
+}
+```
+
+---
+
 ## Error Codes Reference
 
-| Code               | Typical Status | Description                                         |
-| ------------------ | -------------- | --------------------------------------------------- |
-| `VALIDATION_ERROR` | 400            | Schema validation failed or invalid input           |
-| `UNAUTHORIZED`     | 401            | Missing, invalid, or expired token                  |
-| `TOKEN_REUSE`      | 401            | Refresh token reuse detected — all sessions revoked |
-| `NOT_FOUND`        | 404            | Requested resource does not exist                   |
-| `CONFLICT`         | 409            | Resource already exists (e.g. duplicate phone)      |
-| `RATE_LIMITED`     | 429            | Too many requests — see `Retry-After` header        |
-| `INTERNAL_ERROR`   | 500            | Unexpected server error                             |
+| Code                | Typical Status | Description                                         |
+| ------------------- | -------------- | --------------------------------------------------- |
+| `VALIDATION_ERROR`  | 400            | Schema validation failed or invalid input           |
+| `UNAUTHORIZED`      | 401            | Missing, invalid, or expired token                  |
+| `TOKEN_REUSE`       | 401            | Refresh token reuse detected — all sessions revoked |
+| `NOT_FOUND`         | 404            | Requested resource does not exist                   |
+| `CONFLICT`          | 409            | Resource already exists (e.g. duplicate phone)      |
+| `RATE_LIMITED`      | 429            | Too many requests — see `Retry-After` header        |
+| `INTERNAL_ERROR`    | 500            | Unexpected server error                             |
+| `FORBIDDEN`         | 403            | Not the creator / insufficient role                 |
+| `ISSUE_CLOSED`      | 400            | Cannot support / modify a closed issue              |
+| `ALREADY_SUPPORTED` | 409            | User has already supported this issue               |
+| `OUTSIDE_INDIA`     | 400            | Coordinates outside the Indian bounding box         |
+| `STATE_NOT_FOUND`   | 404            | State code not recognised                           |
 
 ---
 
@@ -652,6 +1207,7 @@ Swagger UI is available at `http://localhost:3000/api/docs` when running in deve
 
 ## Changelog
 
-| Version | Date       | Changes                                                  |
-| ------- | ---------- | -------------------------------------------------------- |
-| 1.0.0   | 2026-04-08 | Sprint 1 complete — auth, profile, location, media proxy |
+| Version | Date       | Changes                                                                                                      |
+| ------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
+| 1.0.0   | 2026-04-08 | Sprint 1 complete — auth, profile, location, media proxy                                                     |
+| 1.1.0   | 2026-04-21 | Sprint 2 complete — issues CRUD, photos, taxonomy, officials, supports, search, tag suggestions, ranked feed |

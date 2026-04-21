@@ -64,3 +64,25 @@ export const GOV_CACHE_PREFIX = 'gov';
 export function govCacheKey(...parts) {
   return [GOV_CACHE_PREFIX, ...parts].join(':');
 }
+
+/**
+ * Redis key for a ranked feed result.
+ * Format: feed:{mode}:{filterHash}:{page}:{limit}
+ *
+ * @param {string} mode    — trending|nearby|latest|critical
+ * @param {Object} filters — active filter params (including lat/lng for nearby)
+ * @param {number} page
+ * @param {number} limit
+ * @returns {string}
+ */
+export function feedCacheKey(mode, filters, page, limit) {
+  return `feed:${mode}:${filterHash(filters)}:${page}:${limit}`;
+}
+
+/** TTLs (seconds) per feed mode — trending changes fastest */
+export const FEED_TTL = {
+  trending: 30,
+  nearby: 45,
+  latest: 60,
+  critical: 60,
+};

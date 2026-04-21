@@ -8,6 +8,7 @@
  * truncateTables()       — wipe all rows (fast schema-preserving cleanup)
  * closeTestConnections() — call in afterAll to prevent open-handle warnings
  * createTestUser()       — inserts a user row and returns user + signed JWT
+ * createTestIssue()      — inserts an issue row with sensible defaults
  * authHeader()           — returns { Authorization: 'Bearer <token>' }
  */
 
@@ -34,11 +35,20 @@ export async function createTestApp() {
 
 // ── Cleanup ───────────────────────────────────────────────────────────────────
 
+/**
+ * Truncate transactional tables. Taxonomy tables (ministries, departments,
+ * grievance_categories) are NOT truncated — they are seed data.
+ *
+ * Tables listed from outermost FK dependents → innermost parents.
+ * Supports + comments reference issues; user_activity/notifications reference users.
+ * The officials table may not exist in Sprint 2 schema — catch and ignore.
+ */
 export async function truncateTables() {
   await pool.query(`
-    TRUNCATE user_activity, notifications, comments, supports, issues, officials, users
+    TRUNCATE user_activity, notifications, comments, supports, issue_officials, issues, users
     RESTART IDENTITY CASCADE
   `);
+  // officials seeded per-test-file — do NOT truncate here
   await redis.flushdb();
 }
 
@@ -76,6 +86,39 @@ export async function createTestUser(app, overrides = {}) {
   const token = app.jwt.sign({ id: user.id, phone: user.phone, role: user.role });
 
   return { user, token };
+}
+
+// ── Issue factory ─────────────────────────────────────────────────────────────
+
+/**
+ * Insert an issue directly into the test DB with sensible defaults.
+ * Returns the raw camelCase issue row (no joins).
+ */
+export async function createTestIssue(userId, overrides = {}) {
+  const { rows } = await pool.query(
+    `INSERT INTO issues (
+       title, description, category, urgency,
+       location_lat, location_lng, district, state, pincode,
+       created_by, is_anonymous
+     ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+     RETURNING *`,
+    [
+      overrides.title ?? 'Broken road near main market with potholes',
+      overrides.description ??
+        'Large potholes on the main road causing accidents and vehicle damage daily',
+      overrides.category ?? 'Infrastructure',
+      overrides.urgency ?? 'medium',
+      overrides.locationLat ?? 28.6139,
+      overrides.locationLng ?? 77.209,
+      overrides.district ?? 'Central Delhi',
+      overrides.state ?? 'Delhi',
+      overrides.pincode ?? '110001',
+      userId,
+      overrides.isAnonymous ?? false,
+    ],
+  );
+
+  return toCamelCase(rows[0]);
 }
 
 // ── Auth header ───────────────────────────────────────────────────────────────

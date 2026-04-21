@@ -1,0 +1,683 @@
+[
+  {
+    "code": "MOD",
+    "name": "Ministry of Defence",
+    "type": "central",
+    "website": "https://mod.gov.in",
+    "cpgrams_code": "DEFENCE"
+  },
+  {
+    "code": "MOHFW",
+    "name": "Ministry of Health and Family Welfare",
+    "type": "central",
+    "website": "https://mohfw.gov.in",
+    "cpgrams_code": "HEALTH"
+  },
+  {
+    "code": "MHRD",
+    "name": "Ministry of Education",
+    "type": "central",
+    "website": "https://education.gov.in",
+    "cpgrams_code": "EDUCATION"
+  },
+  {
+    "code": "MOR",
+    "name": "Ministry of Railways",
+    "type": "central",
+    "website": "https://indianrailways.gov.in",
+    "cpgrams_code": "RAILWAYS"
+  },
+  {
+    "code": "MHA",
+    "name": "Ministry of Home Affairs",
+    "type": "central",
+    "website": "https://mha.gov.in",
+    "cpgrams_code": "HOME"
+  },
+  {
+    "code": "MOF",
+    "name": "Ministry of Finance",
+    "type": "central",
+    "website": "https://finmin.nic.in",
+    "cpgrams_code": "FINANCE"
+  },
+  {
+    "code": "MORTH",
+    "name": "Ministry of Road Transport and Highways",
+    "type": "central",
+    "website": "https://morth.nic.in",
+    "cpgrams_code": "ROAD_TRANSPORT"
+  },
+  {
+    "code": "MOLE",
+    "name": "Ministry of Labour and Employment",
+    "type": "central",
+    "website": "https://labour.gov.in",
+    "cpgrams_code": "LABOUR"
+  },
+  {
+    "code": "MOPNG",
+    "name": "Ministry of Petroleum and Natural Gas",
+    "type": "central",
+    "website": "https://mopng.gov.in",
+    "cpgrams_code": "PETROLEUM"
+  },
+  {
+    "code": "MOCA",
+    "name": "Ministry of Civil Aviation",
+    "type": "central",
+    "website": "https://civilaviation.gov.in",
+    "cpgrams_code": "CIVIL_AVIATION"
+  },
+  {
+    "code": "MEA",
+    "name": "Ministry of External Affairs",
+    "type": "central",
+    "website": "https://mea.gov.in",
+    "cpgrams_code": "EXTERNAL_AFFAIRS"
+  },
+  {
+    "code": "MOAFW",
+    "name": "Ministry of Agriculture and Farmers Welfare",
+    "type": "central",
+    "website": "https://agricoop.nic.in",
+    "cpgrams_code": "AGRICULTURE"
+  },
+  {
+    "code": "MORD",
+    "name": "Ministry of Rural Development",
+    "type": "central",
+    "website": "https://rural.nic.in",
+    "cpgrams_code": "RURAL_DEV"
+  },
+  {
+    "code": "MOHUA",
+    "name": "Ministry of Housing and Urban Affairs",
+    "type": "central",
+    "website": "https://mohua.gov.in",
+    "cpgrams_code": "URBAN_AFFAIRS"
+  },
+  {
+    "code": "MOPOWER",
+    "name": "Ministry of Power",
+    "type": "central",
+    "website": "https://powermin.gov.in",
+    "cpgrams_code": "POWER"
+  },
+  {
+    "code": "MOCA_FOOD",
+    "name": "Ministry of Consumer Affairs, Food and Public Distribution",
+    "type": "central",
+    "website": "https://consumeraffairs.nic.in",
+    "cpgrams_code": "CONSUMER_AFFAIRS"
+  },
+  {
+    "code": "MOC",
+    "name": "Ministry of Communications",
+    "type": "central",
+    "website": "https://dot.gov.in",
+    "cpgrams_code": "COMMUNICATIONS"
+  },
+  {
+    "code": "MEITY",
+    "name": "Ministry of Electronics and Information Technology",
+    "type": "central",
+    "website": "https://meity.gov.in",
+    "cpgrams_code": "ELECTRONICS_IT"
+  },
+  {
+    "code": "MOEFCC",
+    "name": "Ministry of Environment, Forest and Climate Change",
+    "type": "central",
+    "website": "https://moef.gov.in",
+    "cpgrams_code": "ENVIRONMENT"
+  },
+  {
+    "code": "MOJS",
+    "name": "Ministry of Jal Shakti",
+    "type": "central",
+    "website": "https://jalshakti-dowr.gov.in",
+    "cpgrams_code": "JAL_SHAKTI"
+  },
+  {
+    "code": "MOWCD",
+    "name": "Ministry of Women and Child Development",
+    "type": "central",
+    "website": "https://wcd.nic.in",
+    "cpgrams_code": "WOMEN_CHILD"
+  },
+  {
+    "code": "MOTA",
+    "name": "Ministry of Tribal Affairs",
+    "type": "central",
+    "website": "https://tribal.nic.in",
+    "cpgrams_code": "TRIBAL_AFFAIRS"
+  },
+  {
+    "code": "MSJE",
+    "name": "Ministry of Social Justice and Empowerment",
+    "type": "central",
+    "website": "https://socialjustice.gov.in",
+    "cpgrams_code": "SOCIAL_JUSTICE"
+  },
+  {
+    "code": "MOMA",
+    "name": "Ministry of Minority Affairs",
+    "type": "central",
+    "website": "https://minorityaffairs.gov.in",
+    "cpgrams_code": "MINORITY_AFFAIRS"
+  },
+  {
+    "code": "MSDE",
+    "name": "Ministry of Skill Development and Entrepreneurship",
+    "type": "central",
+    "website": "https://msde.gov.in",
+    "cpgrams_code": "SKILL_DEV"
+  },
+  {
+    "code": "MOCIA",
+    "name": "Ministry of Commerce and Industry",
+    "type": "central",
+    "website": "https://commerce.gov.in",
+    "cpgrams_code": "COMMERCE"
+  },
+  {
+    "code": "MOTEX",
+    "name": "Ministry of Textiles",
+    "type": "central",
+    "website": "https://texmin.nic.in",
+    "cpgrams_code": "TEXTILES"
+  },
+  {
+    "code": "MOFPI",
+    "name": "Ministry of Food Processing Industries",
+    "type": "central",
+    "website": "https://mofpi.nic.in",
+    "cpgrams_code": "FOOD_PROCESSING"
+  },
+  {
+    "code": "MOMI",
+    "name": "Ministry of Mines",
+    "type": "central",
+    "website": "https://mines.gov.in",
+    "cpgrams_code": "MINES"
+  },
+  {
+    "code": "MOP",
+    "name": "Ministry of Posts (Dept of Posts)",
+    "type": "central",
+    "website": "https://indiapost.gov.in",
+    "cpgrams_code": "POSTS"
+  },
+  {
+    "code": "MOL",
+    "name": "Ministry of Law and Justice",
+    "type": "central",
+    "website": "https://lawmin.gov.in",
+    "cpgrams_code": "LAW_JUSTICE"
+  },
+  {
+    "code": "MOIS",
+    "name": "Ministry of Information and Broadcasting",
+    "type": "central",
+    "website": "https://mib.gov.in",
+    "cpgrams_code": "INFO_BROADCASTING"
+  },
+  {
+    "code": "MOPR",
+    "name": "Ministry of Panchayati Raj",
+    "type": "central",
+    "website": "https://panchayat.gov.in",
+    "cpgrams_code": "PANCHAYATI_RAJ"
+  },
+  {
+    "code": "MOYA",
+    "name": "Ministry of Youth Affairs and Sports",
+    "type": "central",
+    "website": "https://yas.nic.in",
+    "cpgrams_code": "YOUTH_SPORTS"
+  },
+  {
+    "code": "MOT",
+    "name": "Ministry of Tourism",
+    "type": "central",
+    "website": "https://tourism.gov.in",
+    "cpgrams_code": "TOURISM"
+  },
+  {
+    "code": "MOSTAT",
+    "name": "Ministry of Statistics and Programme Implementation",
+    "type": "central",
+    "website": "https://mospi.gov.in",
+    "cpgrams_code": "STATISTICS"
+  },
+  {
+    "code": "MOCOMP",
+    "name": "Ministry of Corporate Affairs",
+    "type": "central",
+    "website": "https://mca.gov.in",
+    "cpgrams_code": "CORPORATE"
+  },
+  {
+    "code": "MOPE",
+    "name": "Ministry of Personnel, Public Grievances and Pensions",
+    "type": "central",
+    "website": "https://dopt.gov.in",
+    "cpgrams_code": "PERSONNEL"
+  },
+  {
+    "code": "MOSHIP",
+    "name": "Ministry of Shipping (Ports, Shipping and Waterways)",
+    "type": "central",
+    "website": "https://shipmin.gov.in",
+    "cpgrams_code": "SHIPPING"
+  },
+  {
+    "code": "MOSTEEL",
+    "name": "Ministry of Steel",
+    "type": "central",
+    "website": "https://steel.gov.in",
+    "cpgrams_code": "STEEL"
+  },
+  {
+    "code": "MOCOAL",
+    "name": "Ministry of Coal",
+    "type": "central",
+    "website": "https://coal.gov.in",
+    "cpgrams_code": "COAL"
+  },
+  {
+    "code": "MONRE",
+    "name": "Ministry of New and Renewable Energy",
+    "type": "central",
+    "website": "https://mnre.gov.in",
+    "cpgrams_code": "RENEWABLE_ENERGY"
+  },
+  {
+    "code": "MOMSME",
+    "name": "Ministry of Micro, Small and Medium Enterprises",
+    "type": "central",
+    "website": "https://msme.gov.in",
+    "cpgrams_code": "MSME"
+  },
+  {
+    "code": "MOCHE",
+    "name": "Ministry of Chemicals and Fertilizers",
+    "type": "central",
+    "website": "https://chemicals.nic.in",
+    "cpgrams_code": "CHEMICALS"
+  },
+  {
+    "code": "MOEA",
+    "name": "Ministry of Earth Sciences",
+    "type": "central",
+    "website": "https://moes.gov.in",
+    "cpgrams_code": "EARTH_SCIENCES"
+  },
+  {
+    "code": "MOST",
+    "name": "Ministry of Science and Technology",
+    "type": "central",
+    "website": "https://dst.gov.in",
+    "cpgrams_code": "SCIENCE_TECH"
+  },
+  {
+    "code": "MOAYU",
+    "name": "Ministry of Ayush",
+    "type": "central",
+    "website": "https://ayush.gov.in",
+    "cpgrams_code": "AYUSH"
+  },
+  {
+    "code": "MOFIS",
+    "name": "Ministry of Fisheries, Animal Husbandry and Dairying",
+    "type": "central",
+    "website": "https://dahd.nic.in",
+    "cpgrams_code": "FISHERIES"
+  },
+  {
+    "code": "MOCU",
+    "name": "Ministry of Culture",
+    "type": "central",
+    "website": "https://indiaculture.gov.in",
+    "cpgrams_code": "CULTURE"
+  },
+  {
+    "code": "MOPD",
+    "name": "Ministry of Parliamentary Affairs",
+    "type": "central",
+    "website": "https://mpa.gov.in",
+    "cpgrams_code": "PARLIAMENTARY"
+  },
+  {
+    "code": "MODEV",
+    "name": "Ministry of Development of North Eastern Region",
+    "type": "central",
+    "website": "https://mdoner.gov.in",
+    "cpgrams_code": "NE_REGION"
+  },
+  {
+    "code": "MOSPAC",
+    "name": "Department of Space (ISRO)",
+    "type": "central",
+    "website": "https://dos.gov.in",
+    "cpgrams_code": "SPACE"
+  },
+  {
+    "code": "MOAE",
+    "name": "Department of Atomic Energy",
+    "type": "central",
+    "website": "https://dae.gov.in",
+    "cpgrams_code": "ATOMIC_ENERGY"
+  },
+  {
+    "code": "MOPLAN",
+    "name": "NITI Aayog",
+    "type": "central",
+    "website": "https://niti.gov.in",
+    "cpgrams_code": "NITI_AAYOG"
+  },
+  {
+    "code": "MOFOOD",
+    "name": "Ministry of Food and Civil Supplies",
+    "type": "central",
+    "website": "https://dfpd.gov.in",
+    "cpgrams_code": "FOOD_SUPPLY"
+  },
+  {
+    "code": "MOCOOPER",
+    "name": "Ministry of Cooperation",
+    "type": "central",
+    "website": "https://cooperation.gov.in",
+    "cpgrams_code": "COOPERATION"
+  },
+  {
+    "code": "MOCOMPA",
+    "name": "Competition Commission of India",
+    "type": "central",
+    "website": "https://cci.gov.in",
+    "cpgrams_code": "CCI"
+  },
+  {
+    "code": "CABINETSE",
+    "name": "Cabinet Secretariat",
+    "type": "central",
+    "website": "https://cabsec.gov.in",
+    "cpgrams_code": "CABINET"
+  },
+  {
+    "code": "PMO",
+    "name": "Prime Minister's Office",
+    "type": "central",
+    "website": "https://pmindia.gov.in",
+    "cpgrams_code": "PMO"
+  },
+  {
+    "code": "PRESIDENT",
+    "name": "President's Secretariat",
+    "type": "central",
+    "website": "https://rashtrapatibhavan.gov.in",
+    "cpgrams_code": "PRESIDENT"
+  },
+  {
+    "code": "VPOUSE",
+    "name": "Vice President's Secretariat",
+    "type": "central",
+    "website": "https://vicepresidentofindia.gov.in",
+    "cpgrams_code": "VICE_PRESIDENT"
+  },
+
+  {
+    "code": "STATE_AP",
+    "name": "Government of Andhra Pradesh",
+    "type": "state",
+    "state_code": "AP",
+    "website": "https://ap.gov.in"
+  },
+  {
+    "code": "STATE_AR",
+    "name": "Government of Arunachal Pradesh",
+    "type": "state",
+    "state_code": "AR",
+    "website": "https://arunachalpradesh.gov.in"
+  },
+  {
+    "code": "STATE_AS",
+    "name": "Government of Assam",
+    "type": "state",
+    "state_code": "AS",
+    "website": "https://assam.gov.in"
+  },
+  {
+    "code": "STATE_BR",
+    "name": "Government of Bihar",
+    "type": "state",
+    "state_code": "BR",
+    "website": "https://bihar.gov.in"
+  },
+  {
+    "code": "STATE_CG",
+    "name": "Government of Chhattisgarh",
+    "type": "state",
+    "state_code": "CG",
+    "website": "https://cg.gov.in"
+  },
+  {
+    "code": "STATE_GA",
+    "name": "Government of Goa",
+    "type": "state",
+    "state_code": "GA",
+    "website": "https://goa.gov.in"
+  },
+  {
+    "code": "STATE_GJ",
+    "name": "Government of Gujarat",
+    "type": "state",
+    "state_code": "GJ",
+    "website": "https://gujaratindia.gov.in"
+  },
+  {
+    "code": "STATE_HR",
+    "name": "Government of Haryana",
+    "type": "state",
+    "state_code": "HR",
+    "website": "https://haryana.gov.in"
+  },
+  {
+    "code": "STATE_HP",
+    "name": "Government of Himachal Pradesh",
+    "type": "state",
+    "state_code": "HP",
+    "website": "https://himachal.nic.in"
+  },
+  {
+    "code": "STATE_JH",
+    "name": "Government of Jharkhand",
+    "type": "state",
+    "state_code": "JH",
+    "website": "https://jharkhand.gov.in"
+  },
+  {
+    "code": "STATE_KA",
+    "name": "Government of Karnataka",
+    "type": "state",
+    "state_code": "KA",
+    "website": "https://karnataka.gov.in"
+  },
+  {
+    "code": "STATE_KL",
+    "name": "Government of Kerala",
+    "type": "state",
+    "state_code": "KL",
+    "website": "https://kerala.gov.in"
+  },
+  {
+    "code": "STATE_MP",
+    "name": "Government of Madhya Pradesh",
+    "type": "state",
+    "state_code": "MP",
+    "website": "https://mp.gov.in"
+  },
+  {
+    "code": "STATE_MH",
+    "name": "Government of Maharashtra",
+    "type": "state",
+    "state_code": "MH",
+    "website": "https://maharashtra.gov.in"
+  },
+  {
+    "code": "STATE_MN",
+    "name": "Government of Manipur",
+    "type": "state",
+    "state_code": "MN",
+    "website": "https://manipur.gov.in"
+  },
+  {
+    "code": "STATE_ML",
+    "name": "Government of Meghalaya",
+    "type": "state",
+    "state_code": "ML",
+    "website": "https://meghalaya.gov.in"
+  },
+  {
+    "code": "STATE_MZ",
+    "name": "Government of Mizoram",
+    "type": "state",
+    "state_code": "MZ",
+    "website": "https://mizoram.gov.in"
+  },
+  {
+    "code": "STATE_NL",
+    "name": "Government of Nagaland",
+    "type": "state",
+    "state_code": "NL",
+    "website": "https://nagaland.gov.in"
+  },
+  {
+    "code": "STATE_OD",
+    "name": "Government of Odisha",
+    "type": "state",
+    "state_code": "OD",
+    "website": "https://odisha.gov.in"
+  },
+  {
+    "code": "STATE_PB",
+    "name": "Government of Punjab",
+    "type": "state",
+    "state_code": "PB",
+    "website": "https://punjab.gov.in"
+  },
+  {
+    "code": "STATE_RJ",
+    "name": "Government of Rajasthan",
+    "type": "state",
+    "state_code": "RJ",
+    "website": "https://rajasthan.gov.in"
+  },
+  {
+    "code": "STATE_SK",
+    "name": "Government of Sikkim",
+    "type": "state",
+    "state_code": "SK",
+    "website": "https://sikkim.gov.in"
+  },
+  {
+    "code": "STATE_TN",
+    "name": "Government of Tamil Nadu",
+    "type": "state",
+    "state_code": "TN",
+    "website": "https://tn.gov.in"
+  },
+  {
+    "code": "STATE_TS",
+    "name": "Government of Telangana",
+    "type": "state",
+    "state_code": "TS",
+    "website": "https://telangana.gov.in"
+  },
+  {
+    "code": "STATE_TR",
+    "name": "Government of Tripura",
+    "type": "state",
+    "state_code": "TR",
+    "website": "https://tripura.gov.in"
+  },
+  {
+    "code": "STATE_UP",
+    "name": "Government of Uttar Pradesh",
+    "type": "state",
+    "state_code": "UP",
+    "website": "https://up.gov.in"
+  },
+  {
+    "code": "STATE_UK",
+    "name": "Government of Uttarakhand",
+    "type": "state",
+    "state_code": "UK",
+    "website": "https://uk.gov.in"
+  },
+  {
+    "code": "STATE_WB",
+    "name": "Government of West Bengal",
+    "type": "state",
+    "state_code": "WB",
+    "website": "https://wb.gov.in"
+  },
+
+  {
+    "code": "UT_AN",
+    "name": "Andaman and Nicobar Islands Administration",
+    "type": "ut",
+    "state_code": "AN",
+    "website": "https://andaman.gov.in"
+  },
+  {
+    "code": "UT_CH",
+    "name": "Chandigarh Administration",
+    "type": "ut",
+    "state_code": "CH",
+    "website": "https://chandigarh.gov.in"
+  },
+  {
+    "code": "UT_DN",
+    "name": "Dadra and Nagar Haveli and Daman and Diu Administration",
+    "type": "ut",
+    "state_code": "DN",
+    "website": "https://daman.nic.in"
+  },
+  {
+    "code": "UT_DL",
+    "name": "Government of Delhi",
+    "type": "ut",
+    "state_code": "DL",
+    "website": "https://delhi.gov.in"
+  },
+  {
+    "code": "UT_JK",
+    "name": "Government of Jammu and Kashmir",
+    "type": "ut",
+    "state_code": "JK",
+    "website": "https://jk.gov.in"
+  },
+  {
+    "code": "UT_LA",
+    "name": "Ladakh Administration",
+    "type": "ut",
+    "state_code": "LA",
+    "website": "https://ladakh.nic.in"
+  },
+  {
+    "code": "UT_LD",
+    "name": "Lakshadweep Administration",
+    "type": "ut",
+    "state_code": "LD",
+    "website": "https://lakshadweep.gov.in"
+  },
+  {
+    "code": "UT_PY",
+    "name": "Government of Puducherry",
+    "type": "ut",
+    "state_code": "PY",
+    "website": "https://py.gov.in"
+  }
+]

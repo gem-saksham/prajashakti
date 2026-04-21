@@ -36,6 +36,23 @@ module.exports = async function globalSetup() {
     await client.end();
   }
 
+  // ── 1b. Enable extensions in test DB ──────────────────────────────────────
+  const testClient = new Client({ connectionString: TEST_DB_URL });
+  await testClient.connect();
+  try {
+    await testClient.query('CREATE EXTENSION IF NOT EXISTS "pgcrypto"');
+    await testClient.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+    // PostGIS — only available when using postgis/postgis Docker image.
+    // Silently skipped if the extension is not installed in this Postgres build.
+    try {
+      await testClient.query('CREATE EXTENSION IF NOT EXISTS "postgis"');
+    } catch {
+      // non-fatal: Haversine fallback is used when PostGIS is unavailable
+    }
+  } finally {
+    await testClient.end();
+  }
+
   // ── 2. Run migrations against the test database ───────────────────────────
   const apiDir     = path.join(__dirname, '..');
   const rootDir    = path.join(apiDir, '../..');
@@ -58,6 +75,25 @@ module.exports = async function globalSetup() {
     const out = (err.stdout?.toString() ?? '') + (err.stderr?.toString() ?? '');
     console.error('[test] Migration error:', out || err.message);
     throw err;
+  }
+
+  // ── 3. Seed taxonomy (ministries, departments, grievance_categories) ─────────
+  // These are foundational read-only data needed by tag suggestion tests.
+  // They are seeded once and never truncated between tests.
+  try {
+    execSync(
+      `node scripts/seed-taxonomy.js`,
+      {
+        cwd: apiDir,
+        env: { ...process.env, NODE_ENV: 'test', DATABASE_URL: TEST_DB_URL },
+        stdio: 'pipe',
+      },
+    );
+    console.log('[test] Taxonomy seeded to prajashakti_test');
+  } catch (err) {
+    const out = (err.stdout?.toString() ?? '') + (err.stderr?.toString() ?? '');
+    console.error('[test] Taxonomy seed error:', out || err.message);
+    // Non-fatal: tag suggestion tests degrade gracefully when taxonomy is absent
   }
 
   // Expose TEST_DATABASE_URL so test files can use it

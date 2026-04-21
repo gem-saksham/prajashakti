@@ -115,18 +115,15 @@ export default function EditProfileScreen({ navigation, route }) {
         bio: bio.trim(),
         ...(location
           ? {
-              district: location.district ?? location.displayName,
+              district: (location.district ?? location.displayName ?? '').slice(0, 100),
               state: location.state ?? '',
-              locationLat: location.lat,
-              locationLng: location.lng,
-              pincode: location.pincode ?? '',
+              ...(location.lat != null && { locationLat: location.lat }),
+              ...(location.lng != null && { locationLng: location.lng }),
+              ...(/^\d{6}$/.test(location.pincode ?? '') && { pincode: location.pincode }),
             }
           : {
-              district: null,
-              state: null,
-              locationLat: null,
-              locationLng: null,
-              pincode: null,
+              district: '',
+              state: '',
             }),
       };
       const { user: updated } = await profileApi.updateProfile(patch);

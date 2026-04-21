@@ -1,0 +1,682 @@
+[
+  {
+    "name": "Commissioner, Municipal Corporation of Delhi (South)",
+    "designation": "IAS Commissioner",
+    "state_code": "DL",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "DL_MCD_S",
+    "public_email": "commissioner.south@mcd.delhi.gov.in",
+    "office_address": "Town Hall, Chandni Chowk, Delhi 110006",
+    "source": "mcd.delhi.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Municipal Corporation of Delhi (North)",
+    "designation": "IAS Commissioner",
+    "state_code": "DL",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "DL_MCD_N",
+    "public_email": "commissioner.north@mcd.delhi.gov.in",
+    "office_address": "Town Hall, Chandni Chowk, Delhi 110006",
+    "source": "mcd.delhi.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Brihanmumbai Municipal Corporation",
+    "designation": "IAS Commissioner, BMC",
+    "state_code": "MH",
+    "district_code": "MH14",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "MH_BMC",
+    "public_email": "mc@mcgm.gov.in",
+    "office_address": "CST Road, Mahapalika Marg, Fort, Mumbai 400001",
+    "source": "mcgm.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Bruhat Bengaluru Mahanagara Palike",
+    "designation": "IAS Commissioner, BBMP",
+    "state_code": "KA",
+    "district_code": "KA18",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "KA_BBMP",
+    "public_email": "commissioner@bbmp.gov.in",
+    "twitter_handle": "@BBMPCOMM",
+    "office_address": "N R Square, Hudson Circle, Bengaluru 560002",
+    "source": "bbmp.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Greater Chennai Corporation",
+    "designation": "IAS Commissioner, GCC",
+    "state_code": "TN",
+    "district_code": "TN07",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "TN_GCC",
+    "public_email": "commissioner@chennaicorporation.gov.in",
+    "office_address": "Ripon Building, Park Town, Chennai 600003",
+    "source": "chennaicorporation.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Municipal Corporation Chandigarh",
+    "designation": "IAS Municipal Commissioner",
+    "state_code": "CH",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "CH_MC",
+    "public_email": "commissioner.mcchd@chd.gov.in",
+    "office_address": "Sector 17, Chandigarh 160017",
+    "source": "mcchandigarh.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Hyderabad Metropolitan Water Supply & Sewerage Board",
+    "designation": "IAS Managing Director, HMWSSB",
+    "state_code": "TS",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TS_HMWSSB",
+    "public_email": "md@hmwssb.gov.in",
+    "office_address": "Khairatabad, Hyderabad 500004",
+    "source": "hmwssb.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Pune Municipal Corporation",
+    "designation": "IAS Commissioner, PMC",
+    "state_code": "MH",
+    "district_code": "MH25",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "MH_PMC",
+    "public_email": "commissioner@punecorporation.org",
+    "office_address": "Shivajinagar, Pune 411005",
+    "source": "punecorporation.org",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Kolkata Municipal Corporation",
+    "designation": "IAS Commissioner, KMC",
+    "state_code": "WB",
+    "district_code": "WB16",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "WB_KMC",
+    "public_email": "commissioner@kmcgov.in",
+    "office_address": "5, SN Banerjee Road, Kolkata 700013",
+    "source": "kmcgov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Ahmedabad Municipal Corporation",
+    "designation": "IAS Commissioner, AMC",
+    "state_code": "GJ",
+    "district_code": "GJ01",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "GJ_AMC",
+    "public_email": "mc@egovamc.com",
+    "office_address": "Danapith, Ahmedabad 380001",
+    "source": "ahmedabadcity.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Maharashtra",
+    "designation": "IAS Chief Secretary",
+    "state_code": "MH",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH_STATE",
+    "office_address": "Mantralaya, Madam Cama Road, Mumbai 400032",
+    "source": "maharashtra.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Uttar Pradesh",
+    "designation": "IAS Chief Secretary",
+    "state_code": "UP",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UP_STATE",
+    "office_address": "2, Sarojini Naidu Marg, Lucknow 226001",
+    "source": "up.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Tamil Nadu",
+    "designation": "IAS Chief Secretary",
+    "state_code": "TN",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TN_STATE",
+    "office_address": "Fort St. George, Chennai 600009",
+    "source": "tn.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Karnataka",
+    "designation": "IAS Chief Secretary",
+    "state_code": "KA",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KA_STATE",
+    "office_address": "Vidhana Soudha, Bengaluru 560001",
+    "source": "karnataka.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Gujarat",
+    "designation": "IAS Chief Secretary",
+    "state_code": "GJ",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "GJ_STATE",
+    "office_address": "Block 5, New Sachivalaya, Gandhinagar 382010",
+    "source": "gujarat.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of West Bengal",
+    "designation": "IAS Chief Secretary",
+    "state_code": "WB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "WB_STATE",
+    "office_address": "Writers' Building, BBD Bagh, Kolkata 700001",
+    "source": "wb.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Rajasthan",
+    "designation": "IAS Chief Secretary",
+    "state_code": "RJ",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "RJ_STATE",
+    "office_address": "Secretariat, Jaipur 302005",
+    "source": "rajasthan.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Punjab",
+    "designation": "IAS Chief Secretary",
+    "state_code": "PB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB_STATE",
+    "office_address": "Punjab Civil Secretariat, Sector 1, Chandigarh 160001",
+    "source": "punjab.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Haryana",
+    "designation": "IAS Chief Secretary",
+    "state_code": "HR",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HR_STATE",
+    "office_address": "Haryana Civil Secretariat, Chandigarh 160001",
+    "source": "haryana.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Central Delhi",
+    "designation": "IAS District Magistrate",
+    "state_code": "DL",
+    "district_code": "DL01",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "DL01",
+    "public_email": "dm-cdl@nic.in",
+    "source": "delhigovt.nic.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, South Delhi",
+    "designation": "IAS District Magistrate",
+    "state_code": "DL",
+    "district_code": "DL08",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "DL08",
+    "public_email": "dm-sdl@nic.in",
+    "source": "delhigovt.nic.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Mumbai City",
+    "designation": "IAS District Magistrate",
+    "state_code": "MH",
+    "district_code": "MH14",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "MH14",
+    "source": "maharashtra.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Bengaluru Urban",
+    "designation": "IAS District Magistrate",
+    "state_code": "KA",
+    "district_code": "KA18",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "KA18",
+    "source": "karnataka.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Lucknow",
+    "designation": "IAS District Magistrate",
+    "state_code": "UP",
+    "district_code": "UP32",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "UP32",
+    "source": "up.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Jaipur",
+    "designation": "IAS District Magistrate",
+    "state_code": "RJ",
+    "district_code": "RJ14",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "RJ14",
+    "public_email": "dm.jaipur@rajasthan.gov.in",
+    "source": "rajasthan.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Chandigarh",
+    "designation": "IAS District Magistrate / Deputy Commissioner",
+    "state_code": "CH",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "CH01",
+    "public_email": "dc-chd@nic.in",
+    "source": "chandigarh.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Pune",
+    "designation": "IAS District Magistrate",
+    "state_code": "MH",
+    "district_code": "MH25",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "MH25",
+    "public_email": "collectorate@pune.gov.in",
+    "source": "pune.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Hyderabad",
+    "designation": "IAS District Collector",
+    "state_code": "TS",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "TS01",
+    "public_email": "colhyd@ap.gov.in",
+    "source": "telangana.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "District Magistrate, Chennai",
+    "designation": "IAS District Collector",
+    "state_code": "TN",
+    "district_code": "TN07",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "TN07",
+    "source": "tn.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Director General, National Highways Authority of India",
+    "designation": "IAS Director General, NHAI",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "public_email": "dgm@nhai.org",
+    "office_address": "G-5 & 6, Sector 10, Dwarka, New Delhi 110075",
+    "twitter_handle": "@NHAI_Official",
+    "source": "nhai.org",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chairman, Central Pollution Control Board",
+    "designation": "Chairman, CPCB",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "public_email": "chairman.cpcb@nic.in",
+    "office_address": "Parivesh Bhawan, East Arjun Nagar, Delhi 110032",
+    "twitter_handle": "@CPCB_OFFICIAL",
+    "source": "cpcb.nic.in"
+  },
+  {
+    "name": "Director General, National Disaster Management Authority",
+    "designation": "Director General, NDMA",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "public_email": "info@ndma.gov.in",
+    "office_address": "A-1, Safdarjung Enclave, New Delhi 110029",
+    "twitter_handle": "@NDMA_India",
+    "source": "ndma.gov.in"
+  },
+  {
+    "name": "Secretary, Ministry of Jal Shakti",
+    "designation": "IAS Secretary, Jal Shakti",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "office_address": "Shram Shakti Bhawan, Rafi Marg, New Delhi 110001",
+    "source": "jalshakti-ddws.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Secretary, Ministry of Road Transport and Highways",
+    "designation": "IAS Secretary, MoRTH",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "office_address": "Transport Bhawan, Parliament Street, New Delhi 110001",
+    "source": "morth.nic.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Director, Central Bureau of Health Intelligence",
+    "designation": "Director, CBHI",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "source": "mohfw.gov.in"
+  },
+  {
+    "name": "Commissioner, South Delhi Municipal Corporation (Engineering)",
+    "designation": "Chief Engineer, SDMC",
+    "state_code": "DL",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "DL_SDMC",
+    "source": "mcdonline.nic.in",
+    "cadre": "IES"
+  },
+  {
+    "name": "Commissioner of Police, Delhi",
+    "designation": "IPS Commissioner of Police",
+    "state_code": "DL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL_CP",
+    "public_email": "cp@delhipolice.gov.in",
+    "office_address": "Indraprastha Estate, New Delhi 110002",
+    "twitter_handle": "@DelhiPolice",
+    "source": "delhipolice.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Commissioner of Police, Mumbai",
+    "designation": "IPS Commissioner of Police",
+    "state_code": "MH",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH_CP_MUM",
+    "public_email": "cp@mumbaipolice.gov.in",
+    "office_address": "Crawford Market, Mumbai 400001",
+    "twitter_handle": "@MumbaiPolice",
+    "source": "mumbaipolice.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Commissioner of Police, Bengaluru City",
+    "designation": "IPS Commissioner of Police",
+    "state_code": "KA",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KA_CP_BLR",
+    "public_email": "cpblr@ksp.gov.in",
+    "twitter_handle": "@BlrCityPolice",
+    "source": "bcp.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Commissioner of Police, Chennai",
+    "designation": "IPS Commissioner of Police",
+    "state_code": "TN",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TN_CP_CHN",
+    "public_email": "cp@chennaipolice.gov.in",
+    "twitter_handle": "@chennaipolice",
+    "source": "chennaipolice.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Director General of Police, Punjab",
+    "designation": "IPS Director General of Police",
+    "state_code": "PB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB_DGP",
+    "source": "punjabpolice.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Director General of Police, Haryana",
+    "designation": "IPS Director General of Police",
+    "state_code": "HR",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HR_DGP",
+    "source": "haryanapolice.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Chief Medical Officer, Central Delhi",
+    "designation": "Chief Medical Officer",
+    "state_code": "DL",
+    "district_code": "DL01",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "DL01_HEALTH",
+    "source": "health.delhigovt.nic.in"
+  },
+  {
+    "name": "Chief Medical Officer, Mumbai Suburban",
+    "designation": "Chief Medical Officer",
+    "state_code": "MH",
+    "district_code": "MH15",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "MH15_HEALTH",
+    "source": "maharashtra.gov.in"
+  },
+  {
+    "name": "District Education Officer, Central Delhi",
+    "designation": "District Education Officer",
+    "state_code": "DL",
+    "district_code": "DL01",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "DL01_EDU",
+    "source": "edudel.nic.in"
+  },
+  {
+    "name": "Commissioner, Punjab State Electricity Board",
+    "designation": "Chairman & Managing Director, PSEB",
+    "state_code": "PB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB_PSPCL",
+    "public_email": "cmd@pspcl.in",
+    "office_address": "The Mall, Patiala 147001",
+    "source": "pspcl.in"
+  },
+  {
+    "name": "Chief Engineer (Roads), Punjab PWD",
+    "designation": "Chief Engineer, PWD (B&R)",
+    "state_code": "PB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB_PWD",
+    "office_address": "PWD Bhawan, Sector 5, Panchkula",
+    "source": "punjab.gov.in",
+    "cadre": "IES"
+  },
+  {
+    "name": "Commissioner, Delhi Jal Board",
+    "designation": "Vice-Chairman & CEO, Delhi Jal Board",
+    "state_code": "DL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL_DJB",
+    "public_email": "ceo@djb.gov.in",
+    "office_address": "Varunalaya Phase 2, Jhandewalan, Delhi 110055",
+    "twitter_handle": "@DelhiJalBoard",
+    "source": "delhijalboard.nic.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Director General, Delhi Electricity Regulatory Commission",
+    "designation": "Chairperson, DERC",
+    "state_code": "DL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL_DERC",
+    "public_email": "webmaster@derc.gov.in",
+    "source": "derc.gov.in"
+  },
+  {
+    "name": "Chief Fire Officer, Delhi Fire Service",
+    "designation": "Chief Fire Officer",
+    "state_code": "DL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL_FIRE",
+    "source": "delhifire.nic.in"
+  },
+  {
+    "name": "Commissioner, Chandigarh Traffic Police",
+    "designation": "Senior Superintendent of Police (Traffic)",
+    "state_code": "CH",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "CH_TRAFFIC",
+    "twitter_handle": "@ChTrafficPolice",
+    "source": "chandigarhpolice.gov.in",
+    "cadre": "IPS"
+  },
+  {
+    "name": "Executive Engineer, National Highways Division, Chandigarh",
+    "designation": "Executive Engineer, NHAI",
+    "state_code": "CH",
+    "jurisdiction_type": "district",
+    "jurisdiction_code": "CH_NHAI",
+    "source": "nhai.org",
+    "cadre": "IES"
+  },
+  {
+    "name": "Municipal Engineer (Roads), MCC Chandigarh",
+    "designation": "Superintending Engineer, MCC",
+    "state_code": "CH",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "CH_MC_ENG",
+    "public_email": "me.roads@mcchandigarh.gov.in",
+    "source": "mcchandigarh.gov.in",
+    "cadre": "IES"
+  },
+  {
+    "name": "Commissioner, Greater Hyderabad Municipal Corporation",
+    "designation": "IAS Commissioner, GHMC",
+    "state_code": "TS",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "TS_GHMC",
+    "public_email": "commissioner@ghmc.gov.in",
+    "twitter_handle": "@GHMCOnline",
+    "office_address": "GHMC Head Office, Troop Bazar, Hyderabad 500001",
+    "source": "ghmc.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Coimbatore City Municipal Corporation",
+    "designation": "IAS Commissioner, CCMC",
+    "state_code": "TN",
+    "district_code": "TN11",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "TN_CCMC",
+    "source": "ccmc.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Surat Municipal Corporation",
+    "designation": "IAS Commissioner, SMC",
+    "state_code": "GJ",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "GJ_SMC",
+    "public_email": "commissioner@suratmunicipal.gov.in",
+    "source": "suratmunicipal.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Nagpur Municipal Corporation",
+    "designation": "IAS Commissioner, NMC",
+    "state_code": "MH",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "MH_NMC",
+    "source": "nagpurcorporation.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Indore Municipal Corporation",
+    "designation": "IAS Commissioner, IMC",
+    "state_code": "MP",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "MP_IMC",
+    "source": "imc.ac.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Bhopal Municipal Corporation",
+    "designation": "IAS Commissioner, BMC",
+    "state_code": "MP",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "MP_BMC",
+    "source": "bhopalmunicipal.com",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Lucknow Nagar Nigam",
+    "designation": "IAS Municipal Commissioner",
+    "state_code": "UP",
+    "district_code": "UP32",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "UP_LNN",
+    "source": "lmc.up.nic.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Kanpur Nagar Nigam",
+    "designation": "IAS Municipal Commissioner",
+    "state_code": "UP",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "UP_KNN",
+    "source": "kanpurnagarnigam.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Patna Municipal Corporation",
+    "designation": "IAS Commissioner",
+    "state_code": "BR",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "BR_PMC",
+    "source": "patnamunicipalcorporation.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Jaipur Municipal Corporation",
+    "designation": "IAS Commissioner",
+    "state_code": "RJ",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "RJ_JMC",
+    "source": "jmcrajasthan.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Chief Secretary, Government of Delhi",
+    "designation": "IAS Chief Secretary, GNCT of Delhi",
+    "state_code": "DL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL_STATE",
+    "office_address": "Delhi Secretariat, IP Estate, New Delhi 110002",
+    "source": "delhi.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Secretary, Department of Drinking Water & Sanitation",
+    "designation": "IAS Secretary, DDWS",
+    "jurisdiction_type": "national",
+    "jurisdiction_code": "NATIONAL",
+    "office_address": "4th Floor, Pandit Deendayal Antyodaya Bhawan, CGO Complex, Delhi",
+    "source": "ddws.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Director General, Municipal Administration, Maharashtra",
+    "designation": "IAS Director General, DMA",
+    "state_code": "MH",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH_DMA",
+    "source": "mahaurban.maharashtra.gov.in",
+    "cadre": "IAS"
+  },
+  {
+    "name": "Commissioner, Delhi Metro Rail Corporation",
+    "designation": "Managing Director, DMRC",
+    "state_code": "DL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL_DMRC",
+    "public_email": "md@dmrc.org",
+    "twitter_handle": "@OfficialDMRC",
+    "office_address": "Metro Bhawan, Fire Brigade Lane, Barakhamba Road, New Delhi",
+    "source": "delhimetrorail.com"
+  }
+]

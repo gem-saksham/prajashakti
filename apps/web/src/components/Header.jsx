@@ -3,10 +3,12 @@ import { useAuth } from '../context/AuthContext.jsx';
 import AvatarUpload from './AvatarUpload.jsx';
 
 const DESKTOP_TABS = [
-  { id: 'feed', label: '📢 Feed' },
+  { id: 'feed', label: '📋 Issues' },
   { id: 'profile', label: '👤 Profile' },
   { id: 'settings', label: '⚙️ Settings' },
 ];
+
+const CREATE_TAB = { id: 'create', label: '+ Report Issue' };
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 769);
@@ -97,7 +99,7 @@ export default function Header({ currentTab, onTabChange }) {
 
         {/* Desktop tab nav — centre */}
         {!isMobile && (
-          <nav style={{ display: 'flex', gap: 2 }}>
+          <nav style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
             {DESKTOP_TABS.map((t) => (
               <button
                 key={t.id}
@@ -119,6 +121,30 @@ export default function Header({ currentTab, onTabChange }) {
                 {t.label}
               </button>
             ))}
+            <button
+              onClick={() => onTabChange(CREATE_TAB.id)}
+              style={{
+                background: 'rgba(220,20,60,0.85)',
+                border: 'none',
+                borderRadius: 8,
+                color: '#fff',
+                fontSize: 13,
+                fontWeight: 700,
+                padding: '7px 16px',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                marginLeft: 6,
+                transition: 'background 0.15s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#DC143C';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(220,20,60,0.85)';
+              }}
+            >
+              {CREATE_TAB.label}
+            </button>
           </nav>
         )}
 

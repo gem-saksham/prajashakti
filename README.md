@@ -32,8 +32,12 @@ prajashakti-mono/
 │   ├── PRODUCTION_CHECKLIST.md
 │   ├── SPRINT_1_QA.md
 │   ├── SPRINT_2_KICKOFF.md
+│   ├── SPRINT_2_QA.md
+│   ├── SPRINT_2_COVERAGE.md
+│   ├── SPRINT_3_KICKOFF.md
 │   └── retrospectives/
-│       └── SPRINT_1.md
+│       ├── SPRINT_1.md
+│       └── SPRINT_2.md
 ├── scripts/
 │   ├── db/               ← DB seed scripts
 │   └── localstack/       ← LocalStack init (S3 bucket creation)
@@ -105,7 +109,7 @@ cd apps/api && npm run migrate:up
 
 ```bash
 cd apps/api
-npm test                  # Jest test suite (81 tests)
+npm test                  # Jest test suite (470 tests)
 npm run test:coverage     # Coverage report
 npm run migrate:up        # Run pending migrations
 npm run migrate:down      # Roll back last migration
@@ -123,7 +127,7 @@ npm run migrate:create -- name-of-migration
 | Cache / Sessions | Redis 7 (via `ioredis`)                                       |
 | Object Storage   | AWS S3 (LocalStack in dev, real S3 in prod)                   |
 | Web              | React 18, Vite 5                                              |
-| Mobile           | React Native, Expo SDK 52, React Navigation                   |
+| Mobile           | React Native 0.81, Expo SDK 54, React Navigation              |
 | Auth             | Phone OTP + JWT (access 15m + refresh 30d with rotation)      |
 | CI/CD            | GitHub Actions                                                |
 | Containers       | Docker + Docker Compose                                       |
@@ -152,9 +156,28 @@ npm run migrate:create -- name-of-migration
 
 **Sprint 1 QA: APPROVED ✅ — 81/81 tests passing**
 
-### Sprint 2 — Issues (Days 16–30) 🔵 Starting Day 16
+### Sprint 2 — Issue Engine (Days 16–30) ✅
 
-See [docs/SPRINT_2_KICKOFF.md](docs/SPRINT_2_KICKOFF.md) for the plan.
+- [x] Day 16: Issue data model + CPGRAMS taxonomy (ministries, departments, grievance categories)
+- [x] Day 17: Issue CRUD API (create, read, list, update, soft-delete, stats, nearby, jurisdiction, bbox)
+- [x] Day 18: Multi-photo upload pipeline with EXIF GPS verification
+- [x] Day 19: Officials directory (CRUD, jurisdiction search, tag/untag to issues)
+- [x] Day 20: Support system with weighted votes + atomic Redis/Postgres counters
+- [x] Day 21: Anti-gaming service (velocity spikes, IP/UA concentration) + tag suggestion service
+- [x] Day 22: Security regression (63 tests — IDOR, SQLi, XSS, mass-assignment, geo bounds), docs, realistic seed (200 users / 503 issues / 6,013 supports)
+- [x] Day 23: Ranked feed API — `GET /api/v1/feed` with modes trending/latest/critical/nearby (pulled forward from Sprint 3)
+- [x] Days 24–26: Web issue creation wizard, list with URL-synced filters, detail page with gallery + map + timeline
+- [x] Day 27: Mobile photo-first issue creation with offline draft queue
+- [x] Day 28: Mobile native UX — pull-to-refresh haptics, swipe actions, pinch-zoom gallery, deep links, offline cache + queued supports
+- [x] Day 30: Sprint 2 QA — 470/470 tests green, 67.16% statement coverage, 0 P0/P1 bugs, 8 P2 items deferred to Sprint 3
+
+**Sprint 2 QA: APPROVED ✅ — 470/470 tests passing, 32 new endpoints, 8 new tables, zero P0/P1 bugs**
+
+See [docs/retrospectives/SPRINT_2.md](docs/retrospectives/SPRINT_2.md) and [docs/SPRINT_2_QA.md](docs/SPRINT_2_QA.md).
+
+### Sprint 3 — The Feed (Days 31–45) 🔵 Starting Day 31
+
+See [docs/SPRINT_3_KICKOFF.md](docs/SPRINT_3_KICKOFF.md) for the plan.
 
 ---
 
@@ -188,7 +211,7 @@ Mobile devices in development cannot reach LocalStack (port 4566 is blocked by W
 - **Upload:** `POST /api/v1/users/me/avatar` — mobile sends raw bytes to API → API uploads to S3
 - **Display:** `GET /api/v1/media/avatars/*` — API proxies S3 object to device
 
-This same proxy pattern will be used for all media in Sprint 2.
+The same proxy pattern is used for issue evidence photos (Sprint 2) and any future media.
 
 ---
 

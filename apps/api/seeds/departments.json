@@ -1,0 +1,1480 @@
+[
+  {
+    "ministry_code": "MOHFW",
+    "code": "PUBLIC_HEALTH",
+    "name": "Department of Public Health",
+    "nodal_officer_title": "Director, Public Health",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOHFW",
+    "code": "HEALTH_SERVICES",
+    "name": "Directorate General of Health Services",
+    "nodal_officer_title": "Director General",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOHFW",
+    "code": "HEALTH_RESEARCH",
+    "name": "Department of Health Research (ICMR)",
+    "nodal_officer_title": "Secretary, DHR",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MOHFW",
+    "code": "FAMILY_WELFARE",
+    "name": "Department of Family Welfare",
+    "nodal_officer_title": "Joint Secretary, FW",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOHFW",
+    "code": "AYUSHMAN_BHARAT",
+    "name": "National Health Authority (Ayushman Bharat)",
+    "nodal_officer_title": "CEO, NHA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MHRD",
+    "code": "SCHOOL_EDU",
+    "name": "Department of School Education and Literacy",
+    "nodal_officer_title": "Secretary, School Education",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MHRD",
+    "code": "HIGHER_EDU",
+    "name": "Department of Higher Education",
+    "nodal_officer_title": "Secretary, Higher Education",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MHRD",
+    "code": "UGC",
+    "name": "University Grants Commission",
+    "nodal_officer_title": "Chairman, UGC",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MHRD",
+    "code": "MID_DAY_MEAL",
+    "name": "PM POSHAN (Mid-Day Meal)",
+    "nodal_officer_title": "Joint Secretary, MDM",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOR",
+    "code": "RAILWAY_BOARD",
+    "name": "Railway Board",
+    "nodal_officer_title": "Chairman, Railway Board",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOR",
+    "code": "RAILWAY_SAFETY",
+    "name": "Railway Safety Commission",
+    "nodal_officer_title": "Commissioner of Railway Safety",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 7
+  },
+  {
+    "ministry_code": "MOR",
+    "code": "RAILWAY_PASSENGER",
+    "name": "Passenger Services Directorate",
+    "nodal_officer_title": "Member (Traffic)",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MHA",
+    "code": "POLICE",
+    "name": "Bureau of Police Research and Development",
+    "nodal_officer_title": "Director General, BPR&D",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MHA",
+    "code": "FIRE_SERVICES",
+    "name": "Directorate General of Fire Services",
+    "nodal_officer_title": "Director General",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MHA",
+    "code": "DISASTER_MGMT",
+    "name": "National Disaster Management Authority",
+    "nodal_officer_title": "Member Secretary, NDMA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 7
+  },
+  {
+    "ministry_code": "MHA",
+    "code": "BORDER_MGMT",
+    "name": "Department of Border Management",
+    "nodal_officer_title": "Secretary, BM",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "MOF",
+    "code": "REVENUE",
+    "name": "Department of Revenue (Income Tax)",
+    "nodal_officer_title": "Secretary, Revenue",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOF",
+    "code": "EXPENDITURE",
+    "name": "Department of Expenditure",
+    "nodal_officer_title": "Secretary, Expenditure",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MOF",
+    "code": "FINANCIAL_SRVCS",
+    "name": "Department of Financial Services (Banking)",
+    "nodal_officer_title": "Secretary, DFS",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOF",
+    "code": "GST_COUNCIL",
+    "name": "GST Council Secretariat",
+    "nodal_officer_title": "Secretary, GST Council",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MORTH",
+    "code": "NATIONAL_HIGHWAYS",
+    "name": "National Highways Authority of India",
+    "nodal_officer_title": "Chairman, NHAI",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MORTH",
+    "code": "ROAD_SAFETY",
+    "name": "Road Safety Cell",
+    "nodal_officer_title": "Joint Secretary, Road Safety",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MORTH",
+    "code": "TRANSPORT_DEPT",
+    "name": "Transport Department",
+    "nodal_officer_title": "Joint Secretary, Transport",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOAFW",
+    "code": "AGRI_COOPERATION",
+    "name": "Department of Agriculture and Cooperation",
+    "nodal_officer_title": "Secretary, Agriculture",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOAFW",
+    "code": "AGRI_RESEARCH",
+    "name": "Department of Agricultural Research (ICAR)",
+    "nodal_officer_title": "Director General, ICAR",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MOAFW",
+    "code": "FARMERS_WELFARE",
+    "name": "Department of Farmers Welfare",
+    "nodal_officer_title": "Secretary, FW",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOAFW",
+    "code": "PM_KISAN",
+    "name": "PM-KISAN Division",
+    "nodal_officer_title": "Joint Secretary, PM-KISAN",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOHUA",
+    "code": "URBAN_DEV",
+    "name": "Department of Urban Development",
+    "nodal_officer_title": "Secretary, Urban Development",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOHUA",
+    "code": "SWACHH_BHARAT",
+    "name": "Swachh Bharat Mission (Urban)",
+    "nodal_officer_title": "Mission Director, SBM",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOHUA",
+    "code": "PMAY_URBAN",
+    "name": "PM Awas Yojana (Urban)",
+    "nodal_officer_title": "Mission Director, PMAY-U",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOHUA",
+    "code": "SMART_CITIES",
+    "name": "Smart Cities Mission",
+    "nodal_officer_title": "Mission Director, SCM",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOHUA",
+    "code": "MUNICIPAL_PWD",
+    "name": "Central Public Works Department",
+    "nodal_officer_title": "Director General, CPWD",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MORD",
+    "code": "RURAL_DEV_DEPT",
+    "name": "Department of Rural Development",
+    "nodal_officer_title": "Secretary, RD",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MORD",
+    "code": "PMAY_GRAMIN",
+    "name": "PM Awas Yojana (Gramin)",
+    "nodal_officer_title": "Mission Director, PMAY-G",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MORD",
+    "code": "MGNREGA",
+    "name": "MGNREGA Division",
+    "nodal_officer_title": "Joint Secretary, MGNREGA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MORD",
+    "code": "LAND_RESOURCES",
+    "name": "Department of Land Resources",
+    "nodal_officer_title": "Secretary, LR",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "MOPOWER",
+    "code": "POWER_DEPT",
+    "name": "Department of Power",
+    "nodal_officer_title": "Secretary, Power",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOPOWER",
+    "code": "POWER_DISCOM",
+    "name": "Central Electricity Authority",
+    "nodal_officer_title": "Chairperson, CEA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOPOWER",
+    "code": "SAUBHAGYA",
+    "name": "Saubhagya Scheme (Rural Electrification)",
+    "nodal_officer_title": "Joint Secretary, RE",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOJS",
+    "code": "WATER_RESOURCES",
+    "name": "Department of Water Resources",
+    "nodal_officer_title": "Secretary, WR",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOJS",
+    "code": "DRINKING_WATER",
+    "name": "Department of Drinking Water and Sanitation",
+    "nodal_officer_title": "Secretary, DDWS",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOJS",
+    "code": "JAL_JEEVAN",
+    "name": "Jal Jeevan Mission",
+    "nodal_officer_title": "Mission Director, JJM",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOCA_FOOD",
+    "code": "CONSUMER_AFFAIRS",
+    "name": "Department of Consumer Affairs",
+    "nodal_officer_title": "Secretary, CA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOCA_FOOD",
+    "code": "FOOD_PDS",
+    "name": "Department of Food and Public Distribution",
+    "nodal_officer_title": "Secretary, DFPD",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOC",
+    "code": "TELECOM",
+    "name": "Department of Telecommunications",
+    "nodal_officer_title": "Secretary, DoT",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOP",
+    "code": "POSTAL_SERVICES",
+    "name": "Department of Posts",
+    "nodal_officer_title": "Director General, Posts",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MEITY",
+    "code": "DIGITAL_INDIA",
+    "name": "Digital India Programme",
+    "nodal_officer_title": "Mission Director, DI",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MEITY",
+    "code": "CYBER_SECURITY",
+    "name": "Indian Computer Emergency Response Team",
+    "nodal_officer_title": "Director General, CERT-In",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 7
+  },
+
+  {
+    "ministry_code": "MOEFCC",
+    "code": "ENVIRONMENT_DEPT",
+    "name": "Department of Environment",
+    "nodal_officer_title": "Secretary, Environment",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MOEFCC",
+    "code": "POLLUTION_CTRL",
+    "name": "Central Pollution Control Board",
+    "nodal_officer_title": "Chairman, CPCB",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOEFCC",
+    "code": "FOREST_DEPT",
+    "name": "Department of Forests",
+    "nodal_officer_title": "Director General, Forests",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "MOWCD",
+    "code": "WOMEN_WELFARE",
+    "name": "Department of Women Welfare",
+    "nodal_officer_title": "Secretary, WCD",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOWCD",
+    "code": "CHILD_WELFARE",
+    "name": "Department of Child Welfare (ICDS)",
+    "nodal_officer_title": "Joint Secretary, ICDS",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MSJE",
+    "code": "SC_WELFARE",
+    "name": "Department of Social Justice (SC Welfare)",
+    "nodal_officer_title": "Secretary, SJ",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MSJE",
+    "code": "DISABILITY",
+    "name": "Department of Empowerment of Persons with Disabilities",
+    "nodal_officer_title": "Secretary, DEPwD",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MSJE",
+    "code": "SENIOR_CITIZENS",
+    "name": "Senior Citizens Division",
+    "nodal_officer_title": "Joint Secretary, SC",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOLE",
+    "code": "LABOUR_WELFARE",
+    "name": "Department of Labour and Welfare",
+    "nodal_officer_title": "Secretary, Labour",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOLE",
+    "code": "EPFO",
+    "name": "Employees Provident Fund Organisation",
+    "nodal_officer_title": "Central PF Commissioner",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOLE",
+    "code": "ESIC",
+    "name": "Employees State Insurance Corporation",
+    "nodal_officer_title": "Director General, ESIC",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOPE",
+    "code": "DARPG",
+    "name": "Department of Administrative Reforms and Public Grievances",
+    "nodal_officer_title": "Secretary, DARPG",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOPE",
+    "code": "PENSION_DEPT",
+    "name": "Department of Pension and Pensioners Welfare",
+    "nodal_officer_title": "Secretary, Pension",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOCA",
+    "code": "DGCA",
+    "name": "Directorate General of Civil Aviation",
+    "nodal_officer_title": "Director General, DGCA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "MOCA",
+    "code": "AAI",
+    "name": "Airports Authority of India",
+    "nodal_officer_title": "Chairman, AAI",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOPNG",
+    "code": "PETROLEUM_DEPT",
+    "name": "Department of Petroleum",
+    "nodal_officer_title": "Secretary, P&NG",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOPNG",
+    "code": "LPG_SUBSIDY",
+    "name": "LPG and Subsidy Division",
+    "nodal_officer_title": "Joint Secretary, LPG",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "MOL",
+    "code": "LEGAL_AFFAIRS",
+    "name": "Department of Legal Affairs",
+    "nodal_officer_title": "Secretary, Legal Affairs",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MOL",
+    "code": "JUSTICE_DEPT",
+    "name": "Department of Justice",
+    "nodal_officer_title": "Secretary, Justice",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "MOD",
+    "code": "DEFENCE_DEPT",
+    "name": "Department of Defence",
+    "nodal_officer_title": "Secretary, Defence",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "MOD",
+    "code": "DEFENCE_PENSION",
+    "name": "Department of Ex-Servicemen Welfare",
+    "nodal_officer_title": "Secretary, ESW",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOD",
+    "code": "CANTONMENT",
+    "name": "Directorate General Defence Estates",
+    "nodal_officer_title": "Director General, DE",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "MOMSME",
+    "code": "MSME_DEPT",
+    "name": "Department of MSME",
+    "nodal_officer_title": "Secretary, MSME",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOMSME",
+    "code": "KVIC",
+    "name": "Khadi and Village Industries Commission",
+    "nodal_officer_title": "Chairman, KVIC",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "MOPR",
+    "code": "PANCHAYAT_DEPT",
+    "name": "Department of Panchayati Raj",
+    "nodal_officer_title": "Secretary, PR",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOPR",
+    "code": "GRAM_SABHA",
+    "name": "Gram Sabha and GP Affairs",
+    "nodal_officer_title": "Joint Secretary, GS",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOAYU",
+    "code": "AYURVEDA_DEPT",
+    "name": "Department of Ayurveda and Traditional Medicine",
+    "nodal_officer_title": "Secretary, Ayush",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MONRE",
+    "code": "SOLAR_ENERGY",
+    "name": "Solar Energy Division",
+    "nodal_officer_title": "Joint Secretary, Solar",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOFIS",
+    "code": "ANIMAL_HUSBANDRY",
+    "name": "Department of Animal Husbandry and Dairying",
+    "nodal_officer_title": "Secretary, DAHD",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "MOFIS",
+    "code": "FISHERIES_DEPT",
+    "name": "Department of Fisheries",
+    "nodal_officer_title": "Secretary, Fisheries",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MSDE",
+    "code": "SKILL_DEV_DEPT",
+    "name": "Department of Skill Development",
+    "nodal_officer_title": "Secretary, MSDE",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOTA",
+    "code": "TRIBAL_WELFARE",
+    "name": "Department of Tribal Welfare",
+    "nodal_officer_title": "Secretary, Tribal Affairs",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "MOMA",
+    "code": "MINORITY_WELFARE",
+    "name": "Department of Minority Welfare",
+    "nodal_officer_title": "Secretary, MA",
+    "jurisdiction_type": "national",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_UP",
+    "code": "UP_PWD",
+    "name": "Uttar Pradesh Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_UP",
+    "code": "UP_HEALTH",
+    "name": "UP Department of Medical Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_UP",
+    "code": "UP_POLICE",
+    "name": "Uttar Pradesh Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UP",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_UP",
+    "code": "UP_EDUCATION",
+    "name": "UP Department of Basic Education",
+    "nodal_officer_title": "Principal Secretary, Education",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_UP",
+    "code": "UP_ELECTRICITY",
+    "name": "UP Power Corporation Ltd",
+    "nodal_officer_title": "Chairman, UPPCL",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UP",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_MH",
+    "code": "MH_PWD",
+    "name": "Maharashtra Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_MH",
+    "code": "MH_HEALTH",
+    "name": "Maharashtra Department of Public Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_MH",
+    "code": "MH_POLICE",
+    "name": "Maharashtra Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_MH",
+    "code": "MH_MUNICIPAL",
+    "name": "Maharashtra Municipal Administration",
+    "nodal_officer_title": "Commissioner, ULB",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "MH",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_MH",
+    "code": "MH_WATER",
+    "name": "Maharashtra Water Supply and Sanitation Department",
+    "nodal_officer_title": "Principal Secretary, WSSD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MH",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_KA",
+    "code": "KA_PWD",
+    "name": "Karnataka Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KA",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_KA",
+    "code": "KA_HEALTH",
+    "name": "Karnataka Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KA",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_KA",
+    "code": "KA_BBMP",
+    "name": "Bruhat Bengaluru Mahanagara Palike",
+    "nodal_officer_title": "Commissioner, BBMP",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "KA_BLR",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "STATE_KA",
+    "code": "KA_POLICE",
+    "name": "Karnataka State Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KA",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_TN",
+    "code": "TN_PWD",
+    "name": "Tamil Nadu Highways Department",
+    "nodal_officer_title": "Secretary, Highways",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TN",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_TN",
+    "code": "TN_HEALTH",
+    "name": "Tamil Nadu Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TN",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_TN",
+    "code": "TN_POLICE",
+    "name": "Tamil Nadu Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TN",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_TN",
+    "code": "TN_WATER",
+    "name": "Tamil Nadu Water Supply and Drainage Board",
+    "nodal_officer_title": "Managing Director, TWAD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TN",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_RJ",
+    "code": "RJ_PWD",
+    "name": "Rajasthan Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "RJ",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_RJ",
+    "code": "RJ_HEALTH",
+    "name": "Rajasthan Department of Medical and Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "RJ",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_RJ",
+    "code": "RJ_POLICE",
+    "name": "Rajasthan Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "RJ",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_RJ",
+    "code": "RJ_WATER",
+    "name": "Public Health Engineering Department, Rajasthan",
+    "nodal_officer_title": "Secretary, PHED",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "RJ",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_GJ",
+    "code": "GJ_ROADS",
+    "name": "Gujarat Roads and Buildings Department",
+    "nodal_officer_title": "Principal Secretary, R&B",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "GJ",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_GJ",
+    "code": "GJ_HEALTH",
+    "name": "Gujarat Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "GJ",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_GJ",
+    "code": "GJ_POLICE",
+    "name": "Gujarat Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "GJ",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_WB",
+    "code": "WB_PWD",
+    "name": "West Bengal Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "WB",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_WB",
+    "code": "WB_HEALTH",
+    "name": "West Bengal Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "WB",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_WB",
+    "code": "WB_POLICE",
+    "name": "West Bengal Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "WB",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_WB",
+    "code": "WB_KMC",
+    "name": "Kolkata Municipal Corporation",
+    "nodal_officer_title": "Municipal Commissioner",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "WB_KOL",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_MP",
+    "code": "MP_PWD",
+    "name": "Madhya Pradesh Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_MP",
+    "code": "MP_HEALTH",
+    "name": "Madhya Pradesh Department of Public Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_MP",
+    "code": "MP_POLICE",
+    "name": "Madhya Pradesh Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "MP",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_BR",
+    "code": "BR_PWD",
+    "name": "Bihar Road Construction Department",
+    "nodal_officer_title": "Principal Secretary, RCD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "BR",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_BR",
+    "code": "BR_HEALTH",
+    "name": "Bihar Department of Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "BR",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_BR",
+    "code": "BR_POLICE",
+    "name": "Bihar Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "BR",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_KL",
+    "code": "KL_PWD",
+    "name": "Kerala Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KL",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_KL",
+    "code": "KL_HEALTH",
+    "name": "Kerala Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KL",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_KL",
+    "code": "KL_POLICE",
+    "name": "Kerala Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KL",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_KL",
+    "code": "KL_WATER",
+    "name": "Kerala Water Authority",
+    "nodal_officer_title": "Managing Director, KWA",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "KL",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_PB",
+    "code": "PB_PWD",
+    "name": "Punjab Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_PB",
+    "code": "PB_HEALTH",
+    "name": "Punjab Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_PB",
+    "code": "PB_POLICE",
+    "name": "Punjab Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_PB",
+    "code": "PB_WATER",
+    "name": "Punjab Water Supply and Sewerage Board",
+    "nodal_officer_title": "Chairman, PWSSB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PB",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_HR",
+    "code": "HR_PWD",
+    "name": "Haryana Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HR",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_HR",
+    "code": "HR_HEALTH",
+    "name": "Haryana Department of Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HR",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_HR",
+    "code": "HR_POLICE",
+    "name": "Haryana Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HR",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_HR",
+    "code": "HR_MCG",
+    "name": "Municipal Corporation Gurugram",
+    "nodal_officer_title": "Municipal Commissioner",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "HR_GGN",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_TS",
+    "code": "TS_ROADS",
+    "name": "Telangana Roads and Buildings Department",
+    "nodal_officer_title": "Principal Secretary, R&B",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TS",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_TS",
+    "code": "TS_HEALTH",
+    "name": "Telangana Department of Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TS",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_TS",
+    "code": "TS_POLICE",
+    "name": "Telangana State Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "TS",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "STATE_TS",
+    "code": "TS_GHMC",
+    "name": "Greater Hyderabad Municipal Corporation",
+    "nodal_officer_title": "Commissioner, GHMC",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "TS_HYD",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "STATE_AP",
+    "code": "AP_ROADS",
+    "name": "Andhra Pradesh Roads and Buildings Department",
+    "nodal_officer_title": "Principal Secretary, R&B",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "AP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_AP",
+    "code": "AP_HEALTH",
+    "name": "Andhra Pradesh Department of Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "AP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_AP",
+    "code": "AP_POLICE",
+    "name": "Andhra Pradesh Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "AP",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_OD",
+    "code": "OD_PWD",
+    "name": "Odisha Works Department",
+    "nodal_officer_title": "Principal Secretary, Works",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "OD",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_OD",
+    "code": "OD_HEALTH",
+    "name": "Odisha Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "OD",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_OD",
+    "code": "OD_POLICE",
+    "name": "Odisha Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "OD",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_JH",
+    "code": "JH_PWD",
+    "name": "Jharkhand Road Construction Department",
+    "nodal_officer_title": "Principal Secretary, RCD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "JH",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_JH",
+    "code": "JH_HEALTH",
+    "name": "Jharkhand Department of Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "JH",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_JH",
+    "code": "JH_POLICE",
+    "name": "Jharkhand Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "JH",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "STATE_CG",
+    "code": "CG_PWD",
+    "name": "Chhattisgarh Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "CG",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_CG",
+    "code": "CG_HEALTH",
+    "name": "Chhattisgarh Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "CG",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "STATE_AS",
+    "code": "AS_PWD",
+    "name": "Assam Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "AS",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_AS",
+    "code": "AS_HEALTH",
+    "name": "Assam Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "AS",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "STATE_HP",
+    "code": "HP_PWD",
+    "name": "Himachal Pradesh Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HP",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_HP",
+    "code": "HP_HEALTH",
+    "name": "Himachal Pradesh Department of Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "HP",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "STATE_UK",
+    "code": "UK_PWD",
+    "name": "Uttarakhand Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UK",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_UK",
+    "code": "UK_HEALTH",
+    "name": "Uttarakhand Department of Medical Health",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "UK",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "STATE_GA",
+    "code": "GA_PWD",
+    "name": "Goa Public Works Department",
+    "nodal_officer_title": "Chief Engineer, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "GA",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "STATE_GA",
+    "code": "GA_HEALTH",
+    "name": "Goa Directorate of Health Services",
+    "nodal_officer_title": "Director, Health Services",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "GA",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "STATE_SK",
+    "code": "SK_PWD",
+    "name": "Sikkim Public Works Department",
+    "nodal_officer_title": "Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "SK",
+    "resolution_sla_days": 30
+  },
+
+  {
+    "ministry_code": "UT_DL",
+    "code": "DL_PWD",
+    "name": "Delhi Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "UT_DL",
+    "code": "DL_HEALTH",
+    "name": "Delhi Department of Health and Family Welfare",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "UT_DL",
+    "code": "DL_POLICE",
+    "name": "Delhi Police",
+    "nodal_officer_title": "Commissioner of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "UT_DL",
+    "code": "DL_MCD",
+    "name": "Municipal Corporation of Delhi",
+    "nodal_officer_title": "Commissioner, MCD",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "DL_MCD",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "UT_DL",
+    "code": "DL_WATER",
+    "name": "Delhi Jal Board",
+    "nodal_officer_title": "CEO, DJB",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "UT_DL",
+    "code": "DL_TRANSPORT",
+    "name": "Delhi Transport Corporation",
+    "nodal_officer_title": "Managing Director, DTC",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "DL",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "UT_CH",
+    "code": "CH_MC",
+    "name": "Municipal Corporation Chandigarh",
+    "nodal_officer_title": "Municipal Commissioner",
+    "jurisdiction_type": "municipal",
+    "jurisdiction_code": "CH_MC",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "UT_CH",
+    "code": "CH_HEALTH",
+    "name": "Chandigarh Health Department",
+    "nodal_officer_title": "Director, Health Services",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "CH",
+    "resolution_sla_days": 21
+  },
+  {
+    "ministry_code": "UT_CH",
+    "code": "CH_POLICE",
+    "name": "Chandigarh Police",
+    "nodal_officer_title": "Senior Superintendent of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "CH",
+    "resolution_sla_days": 14
+  },
+  {
+    "ministry_code": "UT_CH",
+    "code": "CH_ENGG",
+    "name": "Chandigarh Engineering Department",
+    "nodal_officer_title": "Chief Engineer",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "CH",
+    "resolution_sla_days": 21
+  },
+
+  {
+    "ministry_code": "UT_JK",
+    "code": "JK_PWD",
+    "name": "Jammu and Kashmir Public Works Department",
+    "nodal_officer_title": "Principal Secretary, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "JK",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "UT_JK",
+    "code": "JK_HEALTH",
+    "name": "J&K Department of Health and Medical Education",
+    "nodal_officer_title": "Principal Secretary, Health",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "JK",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "UT_JK",
+    "code": "JK_POLICE",
+    "name": "Jammu and Kashmir Police",
+    "nodal_officer_title": "Director General of Police",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "JK",
+    "resolution_sla_days": 14
+  },
+
+  {
+    "ministry_code": "UT_PY",
+    "code": "PY_PWD",
+    "name": "Puducherry Public Works Department",
+    "nodal_officer_title": "Chief Engineer, PWD",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PY",
+    "resolution_sla_days": 30
+  },
+  {
+    "ministry_code": "UT_PY",
+    "code": "PY_HEALTH",
+    "name": "Puducherry Department of Health",
+    "nodal_officer_title": "Director, Health Services",
+    "jurisdiction_type": "state",
+    "jurisdiction_code": "PY",
+    "resolution_sla_days": 30
+  }
+]
